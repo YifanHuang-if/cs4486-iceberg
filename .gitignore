@@ -1,0 +1,37 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+kaggle.json
+*.pem
+.vscode/
+.idea/
+# Competition data and archives
+/data/raw/*
+!/data/raw/.gitkeep
+train.json
+test.json
+sample_submission.csv
+*.zip
+*.7z
+*.rar
+# Generated models and large outputs
+/outputs/*
+!/outputs/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+*.npy
+*.npz
+# OS files
+.DS_Store
+Thumbs.db
