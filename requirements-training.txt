@@ -1,0 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+-r requirements-eda.txt
+torch==2.5.1+cpu
+sympy==1.13.1

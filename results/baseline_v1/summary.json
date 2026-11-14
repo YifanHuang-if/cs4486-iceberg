@@ -1,0 +1,28 @@
+{
+  "oof_log_loss": 0.24638385235916022,
+  "fold_mean": 0.24637966409005566,
+  "fold_std": 0.022815495536461814,
+  "accuracy": 0.8952618453865336,
+  "prior_baseline_log_loss": 0.6912813645949524,
+  "parameters": 60433,
+  "elapsed_seconds": 3.208479166030884,
+  "python": "3.12.6",
+  "torch": "2.5.1+cpu",
+  "device": "cpu",
+  "config": {
+    "seed": 42,
+    "threads": 4,
+    "batch_size": 32,
+    "max_epochs": 30,
+    "patience": 7,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "augmentation": false,
+    "use_angle": false
+  },
+  "folds_sha256": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681",
+  "angle_missing_0_log_loss": 0.23739891784511397,
+  "angle_missing_1_log_loss": 0.3457585792024842,
+  "original_training_seconds": 175.3893449306488,
+  "resume_verification_passed": true
+}
