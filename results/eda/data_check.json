@@ -1,0 +1,113 @@
+{
+  "train": {
+    "samples": 1604,
+    "columns": [
+      "band_1",
+      "band_2",
+      "id",
+      "inc_angle",
+      "is_iceberg"
+    ],
+    "duplicate_ids": 0,
+    "band_shape": [
+      75,
+      75
+    ],
+    "all_band_values_finite": true,
+    "band_min": [
+      -45.594448,
+      -45.655499
+    ],
+    "band_max": [
+      34.574917,
+      20.154249
+    ],
+    "missing_angles": 133,
+    "known_angle_min": 24.7546,
+    "known_angle_max": 45.9375,
+    "unique_known_angles": 878,
+    "repeated_angle_groups": 217,
+    "samples_in_repeated_angle_groups": 810,
+    "exact_duplicate_image_excess_rows": 0,
+    "label_counts": {
+      "0": 851,
+      "1": 753
+    },
+    "missing_angle_label_counts": {
+      "0": 133
+    },
+    "single_class_repeated_angle_groups": 211,
+    "mixed_class_repeated_angle_groups": 6
+  },
+  "test": {
+    "samples": 8424,
+    "columns": [
+      "band_1",
+      "band_2",
+      "id",
+      "inc_angle"
+    ],
+    "duplicate_ids": 0,
+    "band_shape": [
+      75,
+      75
+    ],
+    "all_band_values_finite": true,
+    "band_min": [
+      -45.680545806884766,
+      -49.0835
+    ],
+    "band_max": [
+      37.090523,
+      37.09052276611328
+    ],
+    "missing_angles": 0,
+    "known_angle_min": 23.0805,
+    "known_angle_max": 50.66178518000562,
+    "unique_known_angles": 6571,
+    "repeated_angle_groups": 536,
+    "samples_in_repeated_angle_groups": 2389,
+    "exact_duplicate_image_excess_rows": 0
+  },
+  "submission": {
+    "rows": 8424,
+    "columns": [
+      "id",
+      "is_iceberg"
+    ],
+    "test_id_set_match": true,
+    "test_id_order_match": true,
+    "distinct_example_probabilities": [
+      0.5
+    ]
+  },
+  "overlap": {
+    "train_test_ids": 0,
+    "exact_image_fingerprints": 0
+  },
+  "source_files": {
+    "train.json": {
+      "bytes": 196313674,
+      "sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696"
+    },
+    "test.json": {
+      "bytes": 1521771850,
+      "sha256": "b1334a65bd0ceb9a027c780ba222f1dfba4cc34bd6adffef2ef5ed0e22a002fd"
+    },
+    "sample_submission.csv": {
+      "bytes": 117951,
+      "sha256": "9f29b3a08e97c0e7d6e80729211a7a15581a06c9214c1f76b8cff75f173f6d5e"
+    }
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "matplotlib": "3.10.8",
+      "ijson": "3.4.0.post0"
+    }
+  },
+  "scope": "Data inspection only; no fitted preprocessing, folds, training or model scores."
+}
