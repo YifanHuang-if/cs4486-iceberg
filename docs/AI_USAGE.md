@@ -1,4 +1,4 @@
-# AI 使用记录
+# AI Tool Usage
 
-- 项目初始化：ChatGPT 辅助建立协作目录、Git 忽略规则、分工和记录模板；尚未生成模型实现或实验结果。
-- 后续请记录日期、工具、用途、涉及文件，以及成员独立完成并检查的内容。
+- Initial setup: ChatGPT assisted with repository structure, Git ignore rules and collaboration documentation.
+- 2026-11-14, step 4: ChatGPT generated the EDA script and English documentation, assisted with environment setup, and executed data checks and visualizations. The team must review the implementation, verify the findings and accurately disclose this assistance in the course report. No independent student implementation or understanding is asserted by this record.

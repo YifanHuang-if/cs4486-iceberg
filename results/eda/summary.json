@@ -1,0 +1,35 @@
+{
+  "train_samples": 1604,
+  "test_samples": 8424,
+  "train_labels": {
+    "0.0": 851,
+    "1.0": 753
+  },
+  "missing_angles": {
+    "test": 0,
+    "train": 133
+  },
+  "duplicate_ids_within_split": 0,
+  "overlapping_train_test_ids": 0,
+  "exact_duplicate_image_rows": 0,
+  "cross_split_image_hash_overlap": 0,
+  "submission_header": [
+    "id",
+    "is_iceberg"
+  ],
+  "submission_ids_match_test_order": true,
+  "image_shape": [
+    2,
+    75,
+    75
+  ],
+  "all_image_values_finite": true,
+  "schema_issues": [],
+  "environment": {
+    "python": "3.12.6",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "matplotlib": "3.11.2",
+    "ijson": "3.6.0"
+  }
+}
