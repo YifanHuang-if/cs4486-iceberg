@@ -6,3 +6,5 @@
 - 2026-11-14, step 6: ChatGPT assisted with the CNN architecture, training implementation, fold-specific normalization, early stopping, checkpoint loading and evaluation. Training status and measured results are recorded separately in results/baseline/.
 
 - Step 6 completion: ChatGPT added resumable checkpoint handling, ran all five folds on CPU, checked checkpoint-based evaluation, and summarized the measured results. The earlier incomplete run was preserved.
+
+- 2026-11-15, steps 7-8 implementation: ChatGPT assisted with the V-series experiment workflow, preset comparisons, conditional grouped validation, preprocessing, augmentation, metadata fusion, resumable training, automated integrity checks and English run instructions. Generated result files are supplied separately from this code PR. Students should review the implementation, disclose AI assistance and record their own actual contributions.
