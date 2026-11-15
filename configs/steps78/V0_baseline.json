@@ -1,0 +1,13 @@
+{
+  "seed": 42,
+  "threads": 4,
+  "batch_size": 32,
+  "max_epochs": 30,
+  "patience": 7,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "dropout": 0.25,
+  "augmentation": false,
+  "angle_features": 0,
+  "name": "V0_baseline"
+}
