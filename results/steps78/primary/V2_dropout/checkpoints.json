@@ -1,0 +1,32 @@
+[
+  {
+    "fold": 0,
+    "path": "outputs/steps78/primary/V2_dropout/fold_0.pt",
+    "bytes": 274730,
+    "sha256": "0a5d9f931a2555734977ae19a70e8a4e76ba72ba8de5796d74587c3e46f501bc"
+  },
+  {
+    "fold": 1,
+    "path": "outputs/steps78/primary/V2_dropout/fold_1.pt",
+    "bytes": 274730,
+    "sha256": "febf20a5692c38218fca52e351595d041cc6a1f95a7dc04cf93249e15c80917c"
+  },
+  {
+    "fold": 2,
+    "path": "outputs/steps78/primary/V2_dropout/fold_2.pt",
+    "bytes": 274730,
+    "sha256": "b56bc6811074c84769b6434617857a6d98ea0f1e0b029f365e12c953bea76624"
+  },
+  {
+    "fold": 3,
+    "path": "outputs/steps78/primary/V2_dropout/fold_3.pt",
+    "bytes": 274730,
+    "sha256": "e564ead7cc6fb9c245f143efe54fb4ce841d004eec02e03d419be6c58760f959"
+  },
+  {
+    "fold": 4,
+    "path": "outputs/steps78/primary/V2_dropout/fold_4.pt",
+    "bytes": 274730,
+    "sha256": "41c99729e90f3bf44cd02ff63a5fc877fd5620212a0695f7cf917ebf9e4b85b5"
+  }
+]

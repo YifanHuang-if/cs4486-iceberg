@@ -1,0 +1,32 @@
+[
+  {
+    "fold": 0,
+    "path": "outputs/steps78/angle_grouped/V1_flips/fold_0.pt",
+    "bytes": 274730,
+    "sha256": "7a97273bc33333a603806a0a6b4b83b2426fe1092a6c25592f2496333ccbe977"
+  },
+  {
+    "fold": 1,
+    "path": "outputs/steps78/angle_grouped/V1_flips/fold_1.pt",
+    "bytes": 274730,
+    "sha256": "541cde13b0274e54aa5a83bceae8eeedb38d4501f50c4733382e7b1b4b0b4d5c"
+  },
+  {
+    "fold": 2,
+    "path": "outputs/steps78/angle_grouped/V1_flips/fold_2.pt",
+    "bytes": 274730,
+    "sha256": "a93c3724c65501a93c3d8cb01ec9516cf78c757400b30a21ffb0935b207c45ba"
+  },
+  {
+    "fold": 3,
+    "path": "outputs/steps78/angle_grouped/V1_flips/fold_3.pt",
+    "bytes": 274730,
+    "sha256": "9e092230f5aa884634a77955315d575590075f159a8e1e4f3c543c2c7ad8ecf1"
+  },
+  {
+    "fold": 4,
+    "path": "outputs/steps78/angle_grouped/V1_flips/fold_4.pt",
+    "bytes": 274730,
+    "sha256": "4494d4fd82db47c6e9708e2e418629dc67add607baa61806341aede6ef383165"
+  }
+]
