@@ -1,0 +1,36 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.22683236712121987,
+  "accuracy": 0.9083541147132169,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.24584364630993838,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 0.016564760455017678,
+  "name": "V4_missing",
+  "protocol": "primary",
+  "fold_losses": [
+    0.20260925013706166,
+    0.25485650467467746,
+    0.22454440032521675,
+    0.25022194030055533,
+    0.20185191945936132
+  ],
+  "fold_mean": 0.2268168029793745,
+  "fold_std_population": 0.022576271444987216,
+  "parameters": 60625,
+  "training_seconds": 179.1570244049999,
+  "config": {
+    "seed": 42,
+    "threads": 4,
+    "batch_size": 32,
+    "max_epochs": 30,
+    "patience": 7,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "augmentation": true,
+    "angle_features": 2,
+    "name": "V4_missing"
+  },
+  "folds_sha256_lf": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681"
+}

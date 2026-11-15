@@ -26,6 +26,10 @@ The V-series extends the current `baseline_v1` with paired image flips, a dropou
 - [Preset experiment plan](docs/STEPS78_PLAN.md)
 - [Environment, training, resume and verification](docs/STEPS78_RUN.md)
 
-Running the summarizer generates `docs/STEPS78_RESULTS.md`, `results/steps78/primary_comparison.csv` and `results/steps78/ablations.csv`. These measured outputs are supplied separately with the experiment bundle.
+- [Measured results and limitations](docs/STEPS78_RESULTS.md)
+- [Primary comparison](results/steps78/primary_comparison.csv) and [ablation contrasts](results/steps78/ablations.csv)
+- [Checkpoint verification](results/steps78/verification.json)
 
-Use the separate `requirements-steps78.txt` environment for this workflow. Comparisons use a baseline rerun in the same environment; the historical `baseline_v1` score remains separately documented. The companion experiment bundle provides measured results, per-sample predictions and weights for checkpoint replay. The original training script, primary folds and published baseline outputs are preserved.
+Aggregate results, plots, fold scores, epoch histories and verification metadata are versioned under `results/steps78/`.
+
+Use the separate `requirements-steps78.txt` environment for this workflow. Comparisons use a baseline rerun in the same environment; the historical `baseline_v1` score remains separately documented. The companion experiment bundle provides per-sample predictions, the supplementary grouped fold mapping and weights for checkpoint replay. The original training script, primary folds and published baseline outputs are preserved.

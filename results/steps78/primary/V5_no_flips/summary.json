@@ -1,0 +1,36 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.2503258710925648,
+  "accuracy": 0.8965087281795511,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.2505655202017728,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 0.24767531590726474,
+  "name": "V5_no_flips",
+  "protocol": "primary",
+  "fold_losses": [
+    0.22279744255417055,
+    0.27829676716161367,
+    0.24934351966436238,
+    0.2602460692831565,
+    0.24091624331735417
+  ],
+  "fold_mean": 0.2503200083961315,
+  "fold_std_population": 0.018590866973759404,
+  "parameters": 60609,
+  "training_seconds": 161.22940359200356,
+  "config": {
+    "seed": 42,
+    "threads": 4,
+    "batch_size": 32,
+    "max_epochs": 30,
+    "patience": 7,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "augmentation": false,
+    "angle_features": 1,
+    "name": "V5_no_flips"
+  },
+  "folds_sha256_lf": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681"
+}

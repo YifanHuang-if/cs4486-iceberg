@@ -1,0 +1,32 @@
+[
+  {
+    "fold": 0,
+    "path": "outputs/steps78/primary/V3_angle/fold_0.pt",
+    "bytes": 276378,
+    "sha256": "a24770bb978e7a640fb2c0c90535cad03d77cdfe5d4b11dc18d9ab9ad0c208c3"
+  },
+  {
+    "fold": 1,
+    "path": "outputs/steps78/primary/V3_angle/fold_1.pt",
+    "bytes": 276378,
+    "sha256": "fbdbcbcff1fc9105e2c5ee7e8dba11d9e6a7b08bfc089a7ca6ba589005ef7dac"
+  },
+  {
+    "fold": 2,
+    "path": "outputs/steps78/primary/V3_angle/fold_2.pt",
+    "bytes": 276378,
+    "sha256": "bc78a0bc4a962d6648c50d435b93a1e65380d59820a23a5af4bae174a90405e5"
+  },
+  {
+    "fold": 3,
+    "path": "outputs/steps78/primary/V3_angle/fold_3.pt",
+    "bytes": 276378,
+    "sha256": "9ba9cf27c3ee778e18d6b8911dc227a7ac3f9321e2a77b3e3e7aae93affce440"
+  },
+  {
+    "fold": 4,
+    "path": "outputs/steps78/primary/V3_angle/fold_4.pt",
+    "bytes": 276378,
+    "sha256": "ecbcd6bd96fab4b4e9be299d2f5a2b5cae23fc61174e273a4f507d8840910df4"
+  }
+]
