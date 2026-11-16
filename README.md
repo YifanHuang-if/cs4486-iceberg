@@ -2,6 +2,18 @@
 
 Competition: https://www.kaggle.com/competitions/statoil-iceberg-classifier-challenge
 
+## Steps 9-11: work in progress
+
+This is a **working draft, not the final assessed submission**. Error/subgroup analysis, V4 test inference and Kaggle late scoring have been completed. Public Log Loss is **0.21791** and private Log Loss is **0.20895**. The historical fifth-place scores are 0.08805 and 0.08883 respectively, so the historical Top-5 performance target **has not been reached**. No official late-submission rank is claimed.
+
+- [Current report PDF](report/CS4486_Iceberg_Report_Draft.pdf) and [editable LaTeX source](report/CS4486_Iceberg_Report_Draft.tex)
+- [Steps 9-11 handoff, reproduction and remaining work](docs/STEPS9_11_HANDOFF.md)
+- [Analysis/inference code](src/finalize.py), [focused tests](tests/test_finalize.py) and [continuation dependencies](requirements-final.txt)
+- [Final analysis and scoring evidence](results/final/), including [Kaggle score receipt](results/final/kaggle_score_receipt.json)
+- [Submitted prediction CSV](outputs/final/submission.csv) and [per-sample error evidence](outputs/final/oof_error_details.csv)
+
+Remaining work includes further model development toward the performance target, team name, member bios/reflections and independent-work details, category-level hours, leader review/signature, and confirmation of the course's treatment of late submissions. Reported total member hours remain 8, 6 and 7 (21 combined). The raw data and model-weight bundle are still required to replay the full workflow; they are not committed here.
+
 ## Setup and exploratory analysis
 
 Use Python 3.12 and open this repository in VS Code. Create and activate a local virtual environment, then run:

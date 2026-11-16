@@ -1,0 +1,20 @@
+{
+  "n": 1604,
+  "ships": 851,
+  "icebergs": 753,
+  "log_loss": 0.22683236712121987,
+  "accuracy": 0.9083541147132169,
+  "errors": 147,
+  "high_confidence_errors": 25,
+  "false_icebergs": 81,
+  "missed_icebergs": 66,
+  "corrected_vs_V0": 84,
+  "new_errors_vs_V0": 51,
+  "threshold": 0.5,
+  "high_confidence_thresholds": [
+    0.1,
+    0.9
+  ],
+  "test_angle_complete": true,
+  "analysis_type": "Descriptive post-selection OOF analysis"
+}

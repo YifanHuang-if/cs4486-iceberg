@@ -1,0 +1,54 @@
+{
+  "evidence_received_date": "2026-11-16",
+  "timezone": "Asia/Shanghai",
+  "evidence_type": "user-supplied Kaggle screenshots",
+  "submission_status": "Complete (after deadline)",
+  "file_name": "submission.csv",
+  "description": "CS4486 V4_missing - mean probabilities of 5 folds - 20261116",
+  "model": "V4_missing",
+  "aggregation": "equal mean of five primary fold probabilities",
+  "local_submission_sha256": "1af2c6871bec06ef11ffb52c4c5bcb08acda380bcad0787a7874f2cf15358759",
+  "remote_file_hash_verified": false,
+  "submission_id": null,
+  "exact_submission_timestamp": null,
+  "metric": "Log Loss",
+  "lower_is_better": true,
+  "public_score": 0.21791,
+  "private_score": 0.20895,
+  "displayed_decimal_places": 5,
+  "formal_rank": null,
+  "course_evaluation_case": "A: online scoring available",
+  "historical_top5_score_level_met": false,
+  "comparisons": [
+    {
+      "board": "public",
+      "our_score": 0.21791,
+      "historical_fifth_place_score": 0.08805,
+      "historical_fifth_place_team": "beluga",
+      "excess_log_loss": 0.12986,
+      "top5_score_level_met": false
+    },
+    {
+      "board": "private",
+      "our_score": 0.20895,
+      "historical_fifth_place_score": 0.08883,
+      "historical_fifth_place_team": "Kohei and Medrr",
+      "excess_log_loss": 0.12012,
+      "top5_score_level_met": false
+    }
+  ],
+  "evidence_files": [
+    {
+      "path": "results/final/kaggle_submission_20261116.png",
+      "sha256": "a45021a01dd6e19cd708ec689bfee2f679b4663c2d8a1d7f17080ba0411137c6"
+    },
+    {
+      "path": "results/final/kaggle_public_top5_20261116.png",
+      "sha256": "b4702e1cf300f0b7e50a628e3a65b097fcd0a1130aa0f2542b39c882af8f55af"
+    },
+    {
+      "path": "results/final/kaggle_private_top5_20261116.png",
+      "sha256": "8ba65fcbfb52fa3c560c5c5a094cfcba9227fbeaefc38c8a3b84c50c779b3012"
+    }
+  ]
+}
