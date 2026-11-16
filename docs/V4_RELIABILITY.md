@@ -85,3 +85,24 @@ comparison. It reports precisely which files are missing rather than
 automatically retraining the expensive CNNs. The genuine experiment report is
 written to `results/v4/v4_reliability_fixed.json` only after the required
 artifacts are available.
+
+## Exact-match-preserving V4 ablation
+
+The observed V3 error breakdown showed much lower loss on exact-angle matches
+than on samples supported only by nearby angles. A second V4 variant therefore
+uses the **full original V3 fusion at exact-angle matches** (reliability=1)
+and the evidence-aware gate only when no exact match is available.
+
+- `v4_reliability_fixed.json`: count-and-distance gating for exact and nearby evidence.
+- `v4_exact_preserving.json`: full original fusion for exact matches; gated fusion for neighbors.
+
+The updated `scripts/run_v4.ps1` computes both variants against the **same**
+unchanged V3 OOF predictions. This is a hypothesis-driven ablation, not a
+verified improvement or an independent holdout evaluation. The extra variant
+means choosing the best of the two using the same development folds introduces
+additional selection bias. Both scores and subgroup losses must be disclosed.
+
+The local synthetic suite now contains 12 tests, including exact-match
+preservation and nearby-angle gating. **No experiment on the actual 1,604
+training rows has run in this execution environment.** Both genuine results
+remain pending local V3 prediction artifacts.
