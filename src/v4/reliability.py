@@ -52,10 +52,14 @@ def gated_fuse(model_prob, angle_prob, confidence, *,
         raise ValueError("Inputs must have identical shapes")
     if not np.isfinite(gate).all() or np.any((gate < 0) | (gate > 1)):
         raise ValueError("Invalid reliability")
+    # Gate the full V3 log-odds adjustment, not only the angle term.
+    # As the gate approaches zero, the output must approach model_prob.
     out = p.copy()
     use = gate > 0
-    out[use] = sigmoid(model_weight * logit(p[use]) +
-                       angle_weight * gate[use] * logit(ap[use]))
+    if np.any(use):
+        z = logit(p[use])
+        full_v3 = model_weight * z + angle_weight * logit(ap[use])
+        out[use] = sigmoid(z + gate[use] * (full_v3 - z))
     return np.clip(out, 1e-6, 1-1e-6)
 
 def fold_gated_fusion(model_prob, angles, labels, folds, **kwargs):
