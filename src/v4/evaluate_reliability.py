@@ -9,6 +9,7 @@ import numpy as np
 from src.v3.evaluate import load_metadata, load_tag
 from src.v3.fusion import fold_fusion, loss
 from src.v4.reliability import fold_gated_fusion
+from src.v4.groups import evidence_groups
 
 def main():
     p = argparse.ArgumentParser()
@@ -30,6 +31,22 @@ def main():
         tau=args.tau, distance_scale=args.distance_scale)
     baseline = loss(labels, control)
     score = loss(labels, candidate)
+    eps = 1e-7
+    v3c = np.clip(control, eps, 1-eps)
+    v4c = np.clip(candidate, eps, 1-eps)
+    v3_row_loss = -(labels*np.log(v3c)+(1-labels)*np.log1p(-v3c))
+    v4_row_loss = -(labels*np.log(v4c)+(1-labels)*np.log1p(-v4c))
+    evidence = evidence_groups(angles, folds)
+    evidence_report = {
+        key: {
+            "rows": int(mask.sum()),
+            "v3_log_loss": loss(labels[mask], control[mask]) if mask.any() else None,
+            "v4_log_loss": loss(labels[mask], candidate[mask]) if mask.any() else None,
+            "v3_total_loss_share": float(v3_row_loss[mask].sum() / v3_row_loss.sum()),
+            "v4_total_loss_share": float(v4_row_loss[mask].sum() / v4_row_loss.sum()),
+            "mean_reliability": float(confidence[mask].mean()) if mask.any() else None
+        } for key, mask in evidence.items()
+    }
     report = {
         "name": args.name, "tags": args.tags,
         "metric": "pooled development five-fold OOF log loss",
@@ -44,6 +61,7 @@ def main():
         "improvement_over_v3": baseline - score,
         "target_met_in_development_cv": bool(score < .083),
         "mean_reliability": float(confidence.mean()),
+        "angle_evidence_groups": evidence_report,
         "by_fold": [
             {"fold": int(f), "rows": int(np.count_nonzero(folds == f)),
              "v3": loss(labels[folds == f], control[folds == f]),
