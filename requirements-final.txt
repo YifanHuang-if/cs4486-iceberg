@@ -1,0 +1,7 @@
+# Environment used for checkpoint replay and test inference (Python 3.11, Windows).
+# Keep separate from the original training environments; no retraining was done.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.9.1+cpu
+numpy==2.2.1
+pandas==2.2.3
+matplotlib==3.10.0

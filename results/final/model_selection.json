@@ -1,0 +1,60 @@
+{
+  "selected_variant": "V4_missing",
+  "protocol": "primary",
+  "criterion": "Lowest observed-angle pooled OOF Log Loss among V0-V5; grouped checks are supporting evidence.",
+  "inference": "Equal mean of five primary-fold checkpoint probabilities; no TTA or probability calibration.",
+  "limitations": [
+    "Development folds also selected epochs and compared variants; OOF scores have selection bias. Subsequent Kaggle scores are documented separately.",
+    "Missing angles identify ships in training; overall CV gain overstates gain on observed-angle samples.",
+    "Historical baseline uses a different runtime and is not a controlled improvement comparator.",
+    "Grouped validation covers only V1, V3 and V4; exact angles are proxy groups."
+  ],
+  "checkpoints": [
+    {
+      "fold": 0,
+      "path": "outputs/steps78/primary/V4_missing/fold_0.pt",
+      "bytes": 276442,
+      "sha256": "0ba67bd2515bd6abd67ed9f4c3c4e0703c7aaecee1372faa6526717c7074c895"
+    },
+    {
+      "fold": 1,
+      "path": "outputs/steps78/primary/V4_missing/fold_1.pt",
+      "bytes": 276442,
+      "sha256": "ffeb73727f0ac5351aaf48e9571c236c32e6f0f9a6adda5c20a493576addc059"
+    },
+    {
+      "fold": 2,
+      "path": "outputs/steps78/primary/V4_missing/fold_2.pt",
+      "bytes": 276442,
+      "sha256": "d28e2b5cc3c755f67f37818219cc9cd8809dd4bd63ebeaa680ea9c1092828fb6"
+    },
+    {
+      "fold": 3,
+      "path": "outputs/steps78/primary/V4_missing/fold_3.pt",
+      "bytes": 276442,
+      "sha256": "a0dd608172407a040c40b51bb1b10383b1683c64304ab3745e405a3deaf87d9f"
+    },
+    {
+      "fold": 4,
+      "path": "outputs/steps78/primary/V4_missing/fold_4.pt",
+      "bytes": 276442,
+      "sha256": "99eb35cf3658b9b71264a6f173543e952dce12755f61711a6fc72ff66692490a"
+    }
+  ],
+  "configuration": {
+    "seed": 42,
+    "threads": 4,
+    "batch_size": 32,
+    "max_epochs": 30,
+    "patience": 7,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.25,
+    "augmentation": true,
+    "angle_features": 2,
+    "name": "V4_missing"
+  },
+  "kaggle_status": "completed_late_submission",
+  "top5_status": "historical_top5_score_level_not_reached",
+  "kaggle_receipt": "results/final/kaggle_score_receipt.json"
+}

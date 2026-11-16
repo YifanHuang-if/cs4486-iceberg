@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "source_commit": "f8c9ff017fe8a818784b5e8e02791543f3a31c2e",
+  "bundle_code_commit": "c8ccc8c528a82c3911a93c186f4fcd87dc1149b7",
+  "environment": {
+    "python": "3.11.0",
+    "torch": "2.9.1+cpu",
+    "numpy": "2.2.1",
+    "pandas": "2.2.3",
+    "platform": "Windows-10-10.0.26200-SP0"
+  },
+  "probability_tolerance": 2e-06,
+  "loss_tolerance": 2e-06,
+  "training_data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "runs": [
+    {
+      "protocol": "primary",
+      "experiment": "V0_baseline",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.2606320331976668,
+      "replayed_log_loss": 0.2606320329595133,
+      "max_probability_difference": 5.960464477539062e-07
+    },
+    {
+      "protocol": "primary",
+      "experiment": "V1_flips",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.2587787772546655,
+      "replayed_log_loss": 0.25877878017128036,
+      "max_probability_difference": 3.8743019104003906e-07
+    },
+    {
+      "protocol": "primary",
+      "experiment": "V2_dropout",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.2670349133456256,
+      "replayed_log_loss": 0.2670349142649988,
+      "max_probability_difference": 3.5762786865234375e-07
+    },
+    {
+      "protocol": "primary",
+      "experiment": "V3_angle",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.25406820673466785,
+      "replayed_log_loss": 0.25406820557128723,
+      "max_probability_difference": 4.917383193414615e-07
+    },
+    {
+      "protocol": "primary",
+      "experiment": "V4_missing",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.22683236712121987,
+      "replayed_log_loss": 0.22683236212839925,
+      "max_probability_difference": 6.258487701971127e-07
+    },
+    {
+      "protocol": "primary",
+      "experiment": "V5_no_flips",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.2503258710925648,
+      "replayed_log_loss": 0.2503258584890627,
+      "max_probability_difference": 4.76837158203125e-07
+    },
+    {
+      "protocol": "angle_grouped",
+      "experiment": "V1_flips",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.2724753181662031,
+      "replayed_log_loss": 0.272475311725079,
+      "max_probability_difference": 5.960464476983951e-07
+    },
+    {
+      "protocol": "angle_grouped",
+      "experiment": "V3_angle",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.2735338035415083,
+      "replayed_log_loss": 0.2735338084837893,
+      "max_probability_difference": 5.364418029785156e-07
+    },
+    {
+      "protocol": "angle_grouped",
+      "experiment": "V4_missing",
+      "n": 1604,
+      "checkpoints_verified": 5,
+      "oof_log_loss": 0.23122997117417685,
+      "replayed_log_loss": 0.23122997724685618,
+      "max_probability_difference": 5.960464477539062e-07
+    }
+  ]
+}

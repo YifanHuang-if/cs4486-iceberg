@@ -1,0 +1,29 @@
+{
+  "checkpoint_count": 45,
+  "oof_runs": 9,
+  "largest_replay_difference": 6.258487701971127e-07,
+  "submission_rows": 8424,
+  "submission_sha256": "1af2c6871bec06ef11ffb52c4c5bcb08acda380bcad0787a7874f2cf15358759",
+  "targeted_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "kaggle_uploaded": true,
+  "report_personal_details": "names, IDs, roles and total hours filled; team name, bios, reflections, independent-work details, category-hour breakdown and signature pending",
+  "report_pdf": {
+    "pages": 9,
+    "sha256": "754945e44f23574f4b802430a9a664168723634de414e841e36191f2bf980e9d",
+    "rendered_pages_visually_checked": 9,
+    "status": "technical draft; Kaggle scores and historical fifth-place comparison included; personal fields pending"
+  },
+  "reported_member_hours": {
+    "Huang Yifan": 8,
+    "Zheng Hongyu": 6,
+    "Hachiware": 7,
+    "total": 21
+  },
+  "kaggle_status": "completed late submission, documented by user screenshot",
+  "kaggle_public_score": 0.21791,
+  "kaggle_private_score": 0.20895,
+  "historical_top5_score_level_met": false
+}

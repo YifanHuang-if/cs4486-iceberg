@@ -26,6 +26,13 @@ sample_submission.csv
 # Generated models and large outputs
 /outputs/*
 !/outputs/.gitkeep
+# Explicitly shared steps 9-11 prediction/error artifacts; keep other outputs ignored.
+!/outputs/final/
+/outputs/final/*
+!/outputs/final/submission.csv
+!/outputs/final/test_fold_predictions.csv
+!/outputs/final/oof_error_details.csv
+!/outputs/final/top20_errors.csv
 *.pt
 *.pth
 *.ckpt
