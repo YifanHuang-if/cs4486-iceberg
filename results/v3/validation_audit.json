@@ -1,0 +1,16 @@
+{
+  "base_commit": "661c5cec0af3dd754fa49396794879fdd084a3db",
+  "frozen_split_sha256": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681",
+  "split_verified": true,
+  "train_rows": 1604,
+  "baseline_image_oof": 0.24638385235916022,
+  "baseline_fold_safe_fusion": 0.1439446068253407,
+  "baseline_historical_loo_hybrid": 0.14529482533349147,
+  "note": "The image predictions are identical in both comparisons; only the angle evidence protocol differs.",
+  "v2_full_oof_available": false,
+  "v2_checkpoint_available": false,
+  "reference_document_best_claim": 0.11897,
+  "reference_document_claim_verified_locally": false,
+  "official_target": 0.083,
+  "official_score": null
+}

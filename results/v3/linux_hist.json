@@ -1,0 +1,96 @@
+{
+  "name": "linux_hist",
+  "tags": [
+    "linux_hist"
+  ],
+  "metric": "pooled out-of-fold log loss",
+  "target": 0.083,
+  "official_kaggle_score": null,
+  "split": "data/splits/folds.csv",
+  "validation_note": "Development CV, not an untouched test. V2 design choices were informed by this dataset.",
+  "per_model": {
+    "linux_hist": {
+      "image_log_loss": 0.255080985267648,
+      "fixed_fold_safe_fusion": 0.11836720402608726
+    }
+  },
+  "image_log_loss": 0.255080985267648,
+  "fold_safe_fused_log_loss": 0.11836720402608726,
+  "historical_loo_diagnostic_log_loss": 0.12148567807644313,
+  "historical_loo_warning": "Other labels from the query's validation fold enter the angle prior; not whole-pipeline five-fold OOF.",
+  "coverage": 0.9133416458852868,
+  "by_fold": [
+    {
+      "fold": 0,
+      "rows": 321,
+      "image": 0.26163772990567713,
+      "fused": 0.10709916946060292,
+      "pooled": 0.10705954884948479
+    },
+    {
+      "fold": 1,
+      "rows": 321,
+      "image": 0.2736990746259439,
+      "fused": 0.11455410569981292,
+      "pooled": 0.11443377499759229
+    },
+    {
+      "fold": 2,
+      "rows": 321,
+      "image": 0.20156578548388931,
+      "fused": 0.11222497186896871,
+      "pooled": 0.11259088201856084
+    },
+    {
+      "fold": 3,
+      "rows": 321,
+      "image": 0.29220850457629954,
+      "fused": 0.14558822457814188,
+      "pooled": 0.14521877207621553
+    },
+    {
+      "fold": 4,
+      "rows": 320,
+      "image": 0.24626637189167652,
+      "fused": 0.11235080584946251,
+      "pooled": 0.10889614064562299
+    }
+  ],
+  "pooled_fold_safe_fused_log_loss": 0.11764527489148024,
+  "fixed_clip_001_log_loss": 0.1184474802638406,
+  "pooled_clip_001_log_loss": 0.11770410436413868,
+  "pooling_note": "Fixed 50% within-query exact-angle averaging. Transductive and batch-dependent; no query labels.",
+  "target_met_in_development_cv": false,
+  "claim_first_place": false,
+  "subgroups": {
+    "observed_angle": {
+      "rows": 1471,
+      "image": 0.27542720042624685,
+      "fused": 0.1263524858705273
+    },
+    "missing_angle": {
+      "rows": 133,
+      "image": 0.03004878603231817,
+      "fused": 0.03004878603231817
+    },
+    "angle_prior_covered": {
+      "rows": 1465,
+      "image": 0.27361091152606654,
+      "fused": 0.12392565206431673
+    },
+    "angle_prior_uncovered": {
+      "rows": 139,
+      "image": 0.0597835610332372,
+      "fused": 0.0597835610332372
+    }
+  },
+  "submission": {
+    "path": "outputs/v3/submissions/linux_hist.csv",
+    "rows": 8424,
+    "finite": true,
+    "unique_ids": 8424,
+    "min": 8.824258109520575e-05,
+    "max": 0.9999420911787023,
+    "sha256": "8c4bd94fffd353a992759cd50855bc52488187a6693ef4c16f74340c23724f2f"
+  }
+}
