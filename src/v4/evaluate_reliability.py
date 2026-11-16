@@ -20,6 +20,7 @@ def main():
     p.add_argument("--alpha", type=float, default=.1)
     p.add_argument("--tau", type=float, default=8.)
     p.add_argument("--distance-scale", type=float, default=.02)
+    p.add_argument("--preserve-exact", action="store_true", help="Preserve full V3 fusion when training angle exactly matches")
     args = p.parse_args()
     data = load_metadata(args.folds_file)
     models = [load_tag(tag, data, require_test=False)[0] for tag in args.tags]
@@ -28,7 +29,7 @@ def main():
     control, _ = fold_fusion(model, angles, labels, folds)
     candidate, confidence = fold_gated_fusion(
         model, angles, labels, folds, sigma=args.sigma, alpha=args.alpha,
-        tau=args.tau, distance_scale=args.distance_scale)
+        tau=args.tau, distance_scale=args.distance_scale, preserve_exact=args.preserve_exact)
     baseline = loss(labels, control)
     score = loss(labels, candidate)
     eps = 1e-7
@@ -54,7 +55,7 @@ def main():
         "official_kaggle_score": None, "target": .083,
         "method": "Effective sample size and nearest-distance gated angle prior",
         "parameters": {"sigma": args.sigma, "alpha": args.alpha,
-                       "tau": args.tau, "distance_scale": args.distance_scale},
+                       "tau": args.tau, "distance_scale": args.distance_scale, "preserve_exact": args.preserve_exact},
         "baseline_v3_model_log_loss": loss(labels, model),
         "baseline_v3_fused_log_loss": baseline,
         "candidate_gated_log_loss": score,
