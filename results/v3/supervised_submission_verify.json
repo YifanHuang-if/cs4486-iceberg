@@ -1,0 +1,13 @@
+{
+  "submission": "outputs\\v3\\submissions\\v3_supervised_ensemble.csv",
+  "rows": 8424,
+  "ids_match_order": true,
+  "issues": [],
+  "valid": true,
+  "min": 1e-06,
+  "max": 0.9999929556227116,
+  "mean": 0.37534050184737416,
+  "median": 0.1576226605376055,
+  "share_below_0.1": 0.45726495726495725,
+  "share_above_0.9": 0.2345679012345679
+}

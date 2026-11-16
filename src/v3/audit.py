@@ -17,7 +17,7 @@ def main():
         rows={r["id"]:r for r in csv.DictReader(f)}
     folds=np.array([int(rows[i]["fold"]) for i in ids])
     assert all(int(rows[i]["label"])==int(label) for i,label in zip(ids,y))
-    source=ROOT.parent/"cs4486-iceberg/results/baseline_v1/oof_predictions.csv"
+    source=ROOT/"results/baseline_v1/oof_predictions.csv"
     with source.open(newline="") as f:
         predictions={r["id"]:float(r["probability"]) for r in csv.DictReader(f)}
     model=np.array([predictions[i] for i in ids])

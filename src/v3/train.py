@@ -78,7 +78,10 @@ def run_fold(args,data,fold):
         previous=json.loads(marker.read_text())
         old_config=previous["config"].copy()
         old_config.setdefault("initialize_teacher",False)
-        if old_config!=config or previous["train_ids_sha256"]!=train_hash:
+        old_config.setdefault("validation_only",False)
+        comparison=config.copy()
+        old_config.pop("folds",None);comparison.pop("folds",None)
+        if old_config!=comparison or previous["train_ids_sha256"]!=train_hash:
             raise ValueError("Existing run differs; choose a new tag")
         print(f"SKIP completed {args.tag} fold {fold}",flush=True)
         return previous
@@ -162,15 +165,15 @@ def run_fold(args,data,fold):
     fused=fuse(vp,ap,coverage)
     # Batched test inference limits peak memory on CPU laptops.
     test_prob=[]
-    for lo in range(0,len(data["test_ids"]),512):
+    for lo in range(0,0 if args.validation_only else len(data["test_ids"]),512):
         hi=lo+512
         x=transform_images(data["test_images"][lo:hi],args.normalisation,fitted)
         s=meta_transform(data["test_stats"][lo:hi],meta)
         test_prob.append(predict(model,torch.from_numpy(x),torch.from_numpy(s),args.device,tta=True,batch=128))
-    test_prob=np.concatenate(test_prob)
+    test_prob=np.concatenate(test_prob) if test_prob else np.empty(0,dtype=np.float64)
     np.savez(out/f"fold{fold}_predictions.npz",valid_ids=data["ids"][valid],
              probability=vp,plain_probability=plain,fused_probability=fused,
-             test_ids=data["test_ids"],test_probability=test_prob)
+             test_ids=data["test_ids"] if not args.validation_only else np.empty(0,dtype=data["test_ids"].dtype),test_probability=test_prob)
     save_csv(out/f"fold{fold}_history.csv",["epoch","train_loss","lr"],history)
     result=dict(fold=fold,config=config,train_ids_sha256=train_hash,
                 val_log_loss=loss(data["labels"][valid],vp),
@@ -199,6 +202,7 @@ def main():
     p.add_argument("--teacher",default="")
     p.add_argument("--pseudo-weight",type=float,default=.25)
     p.add_argument("--initialize-teacher",action="store_true")
+    p.add_argument("--validation-only",action="store_true")
     args=p.parse_args()
     if not all(0<=f<=4 for f in args.folds): raise ValueError("Invalid folds")
     torch.set_num_threads(args.threads)

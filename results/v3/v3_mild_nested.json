@@ -1,0 +1,366 @@
+{
+  "base": "v3_mild",
+  "fold_safe_nested_log_loss": 0.11565864252703463,
+  "fold_safe_nested_pooled_log_loss": 0.11608222040115372,
+  "outer_folds": [
+    {
+      "selected": {
+        "sigma": 0.02,
+        "alpha": 0.03,
+        "inner_angle_log_loss": 0.23778200185338838
+      },
+      "candidates": [
+        {
+          "sigma": 0.005,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.28410700528746946
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2806091354799146
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.3125218275908848
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.24863298298350783
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2523111883245391
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.2860163296414785
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.23778200185338838
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.24291658508839345
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.27700961877350067
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.268234943871834
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.273683412603573
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.3041333034846492
+        }
+      ],
+      "outer_fold": 0
+    },
+    {
+      "selected": {
+        "sigma": 0.02,
+        "alpha": 0.03,
+        "inner_angle_log_loss": 0.24227193122238155
+      },
+      "candidates": [
+        {
+          "sigma": 0.005,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.2964879397968321
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.28620766610860093
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.31449186197120177
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.26246832553908933
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2617234662652839
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.29149984661734085
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.24227193122238155
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.249825698711338
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.2835238388151072
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.26356432593350415
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.27058856853930513
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.3027050747132979
+        }
+      ],
+      "outer_fold": 1
+    },
+    {
+      "selected": {
+        "sigma": 0.02,
+        "alpha": 0.03,
+        "inner_angle_log_loss": 0.2367673890181045
+      },
+      "candidates": [
+        {
+          "sigma": 0.005,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.281981749515319
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2815567995948804
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.3160574458366725
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.24341679199440278
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.25050890820761235
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.2878504076900851
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.2367673890181045
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.24551354989763238
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.2816490729049029
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.26905023184344534
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.27635447198644547
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.30788402514911867
+        }
+      ],
+      "outer_fold": 2
+    },
+    {
+      "selected": {
+        "sigma": 0.02,
+        "alpha": 0.03,
+        "inner_angle_log_loss": 0.22948706253090637
+      },
+      "candidates": [
+        {
+          "sigma": 0.005,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.2889961975714426
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2835276429855205
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.3141207873861732
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.2516578437325691
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2545878576970814
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.2878798100826776
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.22948706253090637
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.23994583856700702
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.2764659115378213
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.24920338000063813
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2597108552534077
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.29490019666143674
+        }
+      ],
+      "outer_fold": 3
+    },
+    {
+      "selected": {
+        "sigma": 0.02,
+        "alpha": 0.03,
+        "inner_angle_log_loss": 0.24675376175020447
+      },
+      "candidates": [
+        {
+          "sigma": 0.005,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.28798920813961626
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.28219506558419877
+        },
+        {
+          "sigma": 0.005,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.31237507452483915
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.2541440291046434
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2549891509844699
+        },
+        {
+          "sigma": 0.01,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.28792272999249724
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.24675376175020447
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.25219441104577683
+        },
+        {
+          "sigma": 0.02,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.28445266531248886
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.03,
+          "inner_angle_log_loss": 0.2763051632984854
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.1,
+          "inner_angle_log_loss": 0.2828445333683154
+        },
+        {
+          "sigma": 0.04,
+          "alpha": 0.3,
+          "inner_angle_log_loss": 0.3132812914844281
+        }
+      ],
+      "outer_fold": 4
+    }
+  ],
+  "full_train_selection": {
+    "sigma": 0.02,
+    "alpha": 0.03,
+    "inner_angle_log_loss": 0.22741912021950053
+  },
+  "official_score": null,
+  "target": 0.083,
+  "target_met_in_development_cv": false,
+  "selection_scope": "Each outer fold uses only its training labels; 3 inner folds, 12 angle-only candidates."
+}

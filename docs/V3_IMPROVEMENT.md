@@ -40,7 +40,7 @@ Target: log loss below 0.083. This is a target, not a guaranteed outcome or an o
 - A student, if run, uses only its corresponding fixed-epoch teacher fold and
   the same training-fold angle evidence. High-confidence image/angle agreement
   is required; targets are clipped into [0.02, 0.98], weight 0.25.
-- Report image-only and fused pooled OOF losses, each fold, observed/missing-angle
+- Report neural-model and fused pooled OOF losses, each fold, observed/missing-angle
   subgroups, and a separately named historical LOO diagnostic.
 - The target is evaluated on the entire frozen course split. Exact-angle grouped
   evaluation is a separate robustness experiment, never mixed into random-fold OOF.
@@ -83,3 +83,80 @@ The second-place solution used angle-group folds and substantial CNN/XGBoost
 ensembling:
 https://www.kaggle.com/competitions/statoil-iceberg-classifier-challenge/writeups/beluga-2nd-place-solution-overview
 A small CPU ensemble is not evidence of equivalent official performance.
+
+## Reproduction
+
+From the repository root with the existing Python environment:
+
+```powershell
+.venv\Scripts\python.exe -m src.v3.prepare --raw data/raw
+.venv\Scripts\python.exe -m unittest src.v3.test_isolation -q
+.venv\Scripts\python.exe -m src.v3.train --tag v3_mild_s11 --epochs 40 --threads 4
+.venv\Scripts\python.exe -m src.v3.train --tag v3_global_s29 --seed 29 --normalisation global --augmentation affine --epochs 40 --threads 4
+.venv\Scripts\python.exe -m src.v3.evaluate --tags v3_mild_s11 v3_global_s29 --name v3_supervised_ensemble
+.venv\Scripts\python.exe -m src.v3.evaluate_nested --name v3_supervised_ensemble
+```
+
+The script scripts/run_v3.ps1 wraps these supervised commands and supports an
+optional student run. A CPU smoke test is not a GPU compatibility claim.
+
+Student pilot (only fold 0; not a five-fold score):
+
+```powershell
+.venv\Scripts\python.exe -m src.v3.train --tag v3_student_s47 --seed 47 --teacher v3_mild_s11 --initialize-teacher --lr 0.0003 --epochs 15 --folds 0 --threads 4
+```
+
+To continue an unchanged pilot across all folds, omit --folds 0. Completed
+matching folds are skipped. A changed seed, normalization, epoch budget or other
+training setting requires a different tag. This resumes completed folds, not an
+interrupted epoch.
+
+Grouped robustness run (finite equal-angle groups never cross folds; missing
+angles are treated as separate singleton groups, as in the supplied split):
+
+```powershell
+.venv\Scripts\python.exe -m src.v3.train --tag v3_grouped_s11 --epochs 40 --folds-file results/v2/folds_angle_grouped.csv --validation-only --threads 4
+.venv\Scripts\python.exe -m src.v3.evaluate --tags v3_grouped_s11 --name v3_grouped --folds-file results/v2/folds_angle_grouped.csv --validation-only
+```
+
+## Additional angle and confidence checks
+
+- Nested angle selection: 12 combinations of Gaussian width and shrinkage, scored
+  using three inner folds of each outer training set. No outer query label enters
+  this search. Image fusion weight remains the documented fixed 0.75.
+- A fixed [0.001, 0.999] probability clipping variant is reported, matching the
+  supplied document's submission convention. It is not silently substituted for
+  the unclipped metric.
+- These are development comparisons; selecting a final variant using these
+  results does not create an untouched test score.
+
+## Measured intermediate results
+
+All values below are pooled predictions over all 1,604 training rows on the
+unchanged five-fold course split. The neural models already include metadata;
+"model" means before the explicit angle-prior fusion, not image-only inputs.
+
+| Candidate | Model log loss | Fold-isolated angle fusion |
+|---|---:|---:|
+| Local-normalization CNN | 0.204424 | 0.115420 |
+| Global-normalization CNN | 0.260439 | 0.115521 |
+| Equal mean of the two CNNs | 0.206748 | 0.108068 |
+| Three-seed shape/statistics MLP | 0.228151 | 0.113870 |
+| Equal mean of both CNN families and the shape MLP | 0.194428 | 0.103447 |
+
+The shape model uses 90 per-image/statistical/angle features and three independently
+seeded MLPs per fold. It has no validation-based epoch selection.
+The best currently completed candidate is still above 0.083.
+
+The pseudo-label student and exact-angle-grouped robustness experiments are still
+in progress at this checkpoint. The student pilot improved fold 0 from 0.088291
+to 0.087745 after training on 4,776 soft pseudo-labels; this is not a five-fold
+student result.
+
+Both supervised CNN families passed checkpoint replay over all folds, with
+maximum probability differences below 6e-8. All 15 shape MLP states also passed
+validation and test prediction replay. The supervised ensemble submission has
+8,424 unique IDs in sample-submission order and passed probability checks.
+
+Ten isolation tests passed before the latest shape-feature regression check;
+the final verification record will state the final count.

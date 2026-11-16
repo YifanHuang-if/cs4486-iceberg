@@ -1,0 +1,31 @@
+{
+  "image_baseline": 0.24638385235916022,
+  "nested_angle_baseline": 0.1453822010875783,
+  "selected": [
+    {
+      "sigma": 0.02,
+      "alpha": 0.03,
+      "inner_angle_log_loss": 0.23778200185338838
+    },
+    {
+      "sigma": 0.02,
+      "alpha": 0.03,
+      "inner_angle_log_loss": 0.24227193122238155
+    },
+    {
+      "sigma": 0.02,
+      "alpha": 0.03,
+      "inner_angle_log_loss": 0.2367673890181045
+    },
+    {
+      "sigma": 0.02,
+      "alpha": 0.03,
+      "inner_angle_log_loss": 0.22948706253090637
+    },
+    {
+      "sigma": 0.02,
+      "alpha": 0.03,
+      "inner_angle_log_loss": 0.24675376175020447
+    }
+  ]
+}

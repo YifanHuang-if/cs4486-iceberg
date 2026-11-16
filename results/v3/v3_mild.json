@@ -1,0 +1,96 @@
+{
+  "name": "v3_mild",
+  "tags": [
+    "v3_mild_s11"
+  ],
+  "metric": "pooled out-of-fold log loss",
+  "target": 0.083,
+  "official_kaggle_score": null,
+  "split": "data/splits/folds.csv",
+  "validation_note": "Development CV, not an untouched test. V2 design choices were informed by this dataset.",
+  "per_model": {
+    "v3_mild_s11": {
+      "image_log_loss": 0.20442363207230368,
+      "fixed_fold_safe_fusion": 0.11541971989909566
+    }
+  },
+  "image_log_loss": 0.20442363207230368,
+  "fold_safe_fused_log_loss": 0.11541971989909566,
+  "historical_loo_diagnostic_log_loss": 0.11616617059252103,
+  "historical_loo_warning": "Other labels from the query's validation fold enter the angle prior; not whole-pipeline five-fold OOF.",
+  "coverage": 0.9133416458852868,
+  "by_fold": [
+    {
+      "fold": 0,
+      "rows": 321,
+      "image": 0.17090723610626388,
+      "fused": 0.08829138683291746,
+      "pooled": 0.08826243512287975
+    },
+    {
+      "fold": 1,
+      "rows": 321,
+      "image": 0.22592661167300185,
+      "fused": 0.12187870096702737,
+      "pooled": 0.1207406559299928
+    },
+    {
+      "fold": 2,
+      "rows": 321,
+      "image": 0.22874393462066606,
+      "fused": 0.13771698864181625,
+      "pooled": 0.13888575140287585
+    },
+    {
+      "fold": 3,
+      "rows": 321,
+      "image": 0.2269381270454148,
+      "fused": 0.13917004535509747,
+      "pooled": 0.13799839022503785
+    },
+    {
+      "fold": 4,
+      "rows": 320,
+      "image": 0.169493434100059,
+      "fused": 0.0899621706917432,
+      "pooled": 0.09180752982455995
+    }
+  ],
+  "pooled_fold_safe_fused_log_loss": 0.11555374765236381,
+  "fixed_clip_001_log_loss": 0.11491578589632194,
+  "pooled_clip_001_log_loss": 0.11502169023318677,
+  "pooling_note": "Fixed 50% within-query exact-angle averaging. Transductive and batch-dependent; no query labels.",
+  "target_met_in_development_cv": false,
+  "claim_first_place": false,
+  "subgroups": {
+    "observed_angle": {
+      "rows": 1471,
+      "image": 0.222901819601048,
+      "fused": 0.12585062162443267
+    },
+    "missing_angle": {
+      "rows": 133,
+      "image": 5.209932957555705e-05,
+      "fused": 5.237826021781981e-05
+    },
+    "angle_prior_covered": {
+      "rows": 1465,
+      "image": 0.22204224095030975,
+      "fused": 0.1245935636645752
+    },
+    "angle_prior_uncovered": {
+      "rows": 139,
+      "image": 0.018731099653031023,
+      "fused": 0.018731366543501677
+    }
+  },
+  "submission": {
+    "path": "outputs\\v3\\submissions\\v3_mild.csv",
+    "rows": 8424,
+    "finite": true,
+    "unique_ids": 8424,
+    "min": 1e-06,
+    "max": 0.999999,
+    "sha256": "038c7cacf4b5602d2ba40bc07852e33a131ece4c2c37041bfe2d061028614792"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "python": "3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]",
+  "python_executable": "D:\\Desktop\\ProjectAndAssignment\\CS4486\\Project\\cs4486-iceberg\\.venv\\Scripts\\python.exe",
+  "torch": "2.5.1+cpu",
+  "numpy": "2.5.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cuda_available": false,
+  "source_base_commit": "661c5cec0af3dd754fa49396794879fdd084a3db",
+  "frozen_split_sha256": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681",
+  "tests_passed": 10,
+  "tests_command": "python -m unittest src.v3.test_isolation -q"
+}

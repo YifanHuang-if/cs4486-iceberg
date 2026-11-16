@@ -1,0 +1,101 @@
+{
+  "name": "v3_supervised_ensemble",
+  "tags": [
+    "v3_mild_s11",
+    "v3_global_s29"
+  ],
+  "metric": "pooled out-of-fold log loss",
+  "target": 0.083,
+  "official_kaggle_score": null,
+  "split": "data/splits/folds.csv",
+  "validation_note": "Development CV, not an untouched test. V2 design choices were informed by this dataset.",
+  "per_model": {
+    "v3_mild_s11": {
+      "image_log_loss": 0.20442363207230368,
+      "fixed_fold_safe_fusion": 0.11541971989909566
+    },
+    "v3_global_s29": {
+      "image_log_loss": 0.2604385254129923,
+      "fixed_fold_safe_fusion": 0.11552103407362477
+    }
+  },
+  "image_log_loss": 0.20674784717483335,
+  "fold_safe_fused_log_loss": 0.10806818070498711,
+  "historical_loo_diagnostic_log_loss": 0.10828488199895245,
+  "historical_loo_warning": "Other labels from the query's validation fold enter the angle prior; not whole-pipeline five-fold OOF.",
+  "coverage": 0.9133416458852868,
+  "by_fold": [
+    {
+      "fold": 0,
+      "rows": 321,
+      "image": 0.16632074588248555,
+      "fused": 0.08314143647045982,
+      "pooled": 0.08314157953915018
+    },
+    {
+      "fold": 1,
+      "rows": 321,
+      "image": 0.23246574954413185,
+      "fused": 0.11427169548686657,
+      "pooled": 0.11331327156510555
+    },
+    {
+      "fold": 2,
+      "rows": 321,
+      "image": 0.1982323542177649,
+      "fused": 0.11557768812187087,
+      "pooled": 0.11647968266979991
+    },
+    {
+      "fold": 3,
+      "rows": 321,
+      "image": 0.23920739710699604,
+      "fused": 0.1345051293260021,
+      "pooled": 0.13396269829681343
+    },
+    {
+      "fold": 4,
+      "rows": 320,
+      "image": 0.19748413019137584,
+      "fused": 0.09279738153665729,
+      "pooled": 0.09415748337890516
+    }
+  ],
+  "pooled_fold_safe_fused_log_loss": 0.10821970459850286,
+  "fixed_clip_001_log_loss": 0.10808550354713096,
+  "pooled_clip_001_log_loss": 0.10820366489263136,
+  "pooling_note": "Fixed 50% within-query exact-angle averaging. Transductive and batch-dependent; no query labels.",
+  "target_met_in_development_cv": false,
+  "claim_first_place": false,
+  "subgroups": {
+    "observed_angle": {
+      "rows": 1471,
+      "image": 0.22543670794912993,
+      "fused": 0.11783493956990583
+    },
+    "missing_angle": {
+      "rows": 133,
+      "image": 4.6236656109835335e-05,
+      "fused": 4.635897344240063e-05
+    },
+    "angle_prior_covered": {
+      "rows": 1465,
+      "image": 0.2248913934616041,
+      "fused": 0.11684893524601464
+    },
+    "angle_prior_uncovered": {
+      "rows": 139,
+      "image": 0.015522701058868188,
+      "fused": 0.015522818096315892
+    }
+  },
+  "submission": {
+    "path": "outputs\\v3\\submissions\\v3_supervised_ensemble.csv",
+    "rows": 8424,
+    "finite": true,
+    "unique_ids": 8424,
+    "min": 1e-06,
+    "max": 0.9999929556227116,
+    "sha256": "d9b29cd08593d57bd23e60ad8fceeae8ced2ac9439c25ad9805e5e4e19fcdaac"
+  }
+}

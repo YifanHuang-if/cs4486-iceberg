@@ -1,0 +1,31 @@
+{
+  "tag": "v3_global_s29",
+  "passed": true,
+  "records": [
+    {
+      "fold": 0,
+      "max_absolute_error": 1.4901161193847656e-08,
+      "log_loss": 0.1931395463315921
+    },
+    {
+      "fold": 1,
+      "max_absolute_error": 2.60770320892334e-08,
+      "log_loss": 0.2897504212319261
+    },
+    {
+      "fold": 2,
+      "max_absolute_error": 2.9802322387695312e-08,
+      "log_loss": 0.24830760481826875
+    },
+    {
+      "fold": 3,
+      "max_absolute_error": 1.4901161193847656e-08,
+      "log_loss": 0.3035937139778517
+    },
+    {
+      "fold": 4,
+      "max_absolute_error": 2.7939677238464355e-08,
+      "log_loss": 0.2674231000346401
+    }
+  ]
+}
