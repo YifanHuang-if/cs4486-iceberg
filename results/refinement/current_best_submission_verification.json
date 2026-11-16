@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "candidate": "R4_cnn_mean_empirical_odds_pool",
+  "rows": 8424,
+  "ids_match_sample_order": true,
+  "maximum_postprocessing_replay_difference": 0.0,
+  "probability_min": 1e-07,
+  "probability_max": 0.9999986189138343,
+  "submission_sha256": "f88fa7a7613d8480bde1afdc2376c7b9047d3cf74be0c16242e9203d6b34700f",
+  "clipped_base_rows_replayed_from_weights": 3,
+  "official_kaggle_score": null,
+  "submitted_to_kaggle": false
+}

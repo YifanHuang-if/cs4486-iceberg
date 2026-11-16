@@ -1,0 +1,7 @@
+{
+  "protocol": "primary",
+  "folds_sha256": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681",
+  "n_samples": 1604,
+  "official_score_available": false,
+  "selection_warning": "This is development CV. CNN epochs and model comparisons reuse validation labels; adaptive additions are disclosed in the plan."
+}

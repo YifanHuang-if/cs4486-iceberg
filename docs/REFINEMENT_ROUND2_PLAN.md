@@ -1,0 +1,26 @@
+# Second refinement round (local work only)
+
+The user clarified that improvement must continue toward official private Score < 0.083; completing remaining checks alone is insufficient. Do not publish further changes to GitHub at this stage. The best observed first-round development score is 0.1395165272. An actual official scoring response remains necessary to verify the requested target.
+
+Finish the existing grouped check and generate the first candidate while developing additional methods. Do not change the frozen primary folds, original labels, previous models or reported scores. Retain unsuccessful experiments. Repeated experimentation on these folds introduces selection optimism.
+
+New hypotheses, specified before running their scores:
+
+1. Nearby incidence angles may contain information beyond exact equality. Evaluate train-fold-only Gaussian-weighted label counts at fixed bandwidths [0.0001, 0.001, 0.005, 0.01, 0.05, 0.1], with prior strength one and the existing CNN mean as the image prior. Missing query angles retain the original probability. Test exact-angle-group validation separately; close but nonidentical groups can remain related, so this does not prove scene-independent generalization. These are exploratory comparisons, not independently selected final-test results.
+2. Test a deeper CNN with two convolutions per stage, broader channels, three polarization channels and spatial dropout. Preserve global radar statistics and augment all channels together. Complete all five folds, not just a favorable fold. Compare a fixed blend against the existing two CNNs.
+3. Fine-tune the last stage of a public pretrained ResNet-18 rather than relying only on frozen pooled features. Cache label-independent intermediate maps from the frozen prefix for paired geometric views to make CPU training practical. All trainable task-specific stages and preprocessing must be fitted inside each outer fold. Public ImageNet weights are permitted under the course model-size limit, subject to competition rules.
+
+Sources motivating independent experiments include the first-person winner interview and the second-place original writeup cited in REFINEMENT_PLAN.md. The latter reports incidence-angle-neighborhood features and diverse CNNs; no public solution code or test prediction files are copied. A lower CV value cannot be represented as a Kaggle score.
+
+The six Gaussian-neighborhood settings did not beat the existing exact-angle empirical-context candidate. Their complete OOF comparisons remain in `outputs/refinement/round2_angle_study/`.
+
+Before scoring the new networks, freeze these settings:
+
+- R8_deep: double-convolution stages with channels 16/32/64/128, GroupNorm, SiLU, spatial dropout 0.05, normalized HH/HV/difference channels, metadata branch, 128-unit head with dropout 0.4. AdamW 0.0008, weight decay 0.002, batch size 64, cosine decay, EMA 0.98, seed 142, 60 epochs, minimum 30 and patience 15.
+- R9_finetuned: freeze the public ResNet-18 prefix through the first block of layer4; fine-tune its final block plus a new metadata/classifier head. Use HH/HV/mean pseudo-RGB, per-image percentile scaling, 128-pixel input and all eight paired dihedral views. Cache prefix maps in float16, train/predict in float32. AdamW 0.0001, weight decay 0.002, batch size 32, cosine decay, EMA 0.95, seed 242, 24 epochs, minimum 12 and patience 8. This fine-tunes the final residual block, not the whole backbone.
+
+Both retain the epoch with the lowest ordinary validation loss for the EMA model and separately report eight-view TTA. Primary folds remain identical. The public prefix is frozen and uses no task labels; task-specific weights and metadata normalization are fitted on each training fold only. The configuration differences are a combined model comparison, not isolated causal ablations of every component.
+
+Before evaluating them, add two probability-fusion hypotheses using the already frozen R4 OOF predictions. First, multiply image odds by an angle-group odds ratio relative to the training-fold class prior, with fixed log-odds weights 0.5 or 1 and either concentration one or the training-only empirical concentration. This lets strong image evidence moderate conflicting angle evidence. Second, average predictions within equal-angle **unlabelled query groups**, using a fixed 50/50 mixture of the individual probability and the group mean before each fusion. Query grouping uses no validation labels; it is a declared transductive prediction step and depends on which unlabelled samples are presented together. These eight exploratory combinations are all retained; no weights are fitted on the reported OOF labels. New comparisons still contribute to development selection optimism.
+
+These eight full-fold comparisons reached a best development loss of 0.1313640088 with empirical odds weight one and query pooling. For the new architecture comparisons, freeze four equal-weight blends: R4 = R1/R2, R10 = R1/R2/R8, R11 = R1/R2/R9, and R12 = R1/R2/R8/R9. Retain each complete blend's raw score, original empirical context and the selected empirical-odds/query-pooling postprocessing. This reuses development data and is not an independent test. No ensemble weights are optimized on the reported OOF labels.

@@ -1,0 +1,27 @@
+[
+  {
+    "path": "outputs/refinement/primary/R3_radar_trees/fold_0.cbm",
+    "bytes": 390288,
+    "sha256": "f255d10d393b2960f1200860ba172a5ec61de5db041b61aeca54bb89f07e63d7"
+  },
+  {
+    "path": "outputs/refinement/primary/R3_radar_trees/fold_1.cbm",
+    "bytes": 335248,
+    "sha256": "297dd9e75e64b73b6b1fa8b033387d8dbbed82f685c5b4671e2d649fccb1d851"
+  },
+  {
+    "path": "outputs/refinement/primary/R3_radar_trees/fold_2.cbm",
+    "bytes": 349624,
+    "sha256": "76f5e208b2f94ce7172f4cf8b978af49b0729eaf4e0b1d561f17a1ebd10d1738"
+  },
+  {
+    "path": "outputs/refinement/primary/R3_radar_trees/fold_3.cbm",
+    "bytes": 452512,
+    "sha256": "70d830507ba1dedbf92c33ee8676667af36553899d0610e402bae65c5b8ffd97"
+  },
+  {
+    "path": "outputs/refinement/primary/R3_radar_trees/fold_4.cbm",
+    "bytes": 311032,
+    "sha256": "fc54dcea8d5c6d055d6a3b84073c6aa6433eb1310475177624088a0ee88f6d31"
+  }
+]

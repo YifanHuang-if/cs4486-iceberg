@@ -1,0 +1,36 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.1474659307562552,
+  "accuracy": 0.940149625935162,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.1607958854263241,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 3.462760083157668e-05,
+  "name": "R1_global_fixed_context",
+  "fold_losses": [
+    0.1483210428200377,
+    0.14940091685754117,
+    0.1415471424981709,
+    0.17202065510333256,
+    0.12597294014514973
+  ],
+  "fold_std": 0.014861962715853546,
+  "data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "evaluation_source": {
+    "src/refinement/evaluate.py": "06b54b189680a895e815f89da95ed34e025f72a362160815cd8407cc7e40459b",
+    "src/refinement/context.py": "58d6aac6ffb0e948ed384259f7a31efee9dff4553676a0a4bbad0d133d5a184d"
+  },
+  "official_kaggle_score": null,
+  "official_threshold_verified": false,
+  "local_loss_below_0_083": false,
+  "base_model": "R1_global",
+  "matching_samples": 764,
+  "fold_prior_strengths": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "empirical": false
+}

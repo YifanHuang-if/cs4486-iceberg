@@ -1,0 +1,26 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.3337647561833044,
+  "accuracy": 0.8416458852867831,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.35515075362157766,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 0.09723240857653827,
+  "name": "R6_frozen_resnet",
+  "fold_losses": [
+    0.32650631311677697,
+    0.34021792360627157,
+    0.3303257957150182,
+    0.3271884484369355,
+    0.34461911424107666
+  ],
+  "fold_std": 0.007310533474139338,
+  "data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "evaluation_source": {
+    "src/refinement/evaluate.py": "06b54b189680a895e815f89da95ed34e025f72a362160815cd8407cc7e40459b",
+    "src/refinement/context.py": "58d6aac6ffb0e948ed384259f7a31efee9dff4553676a0a4bbad0d133d5a184d"
+  },
+  "official_kaggle_score": null,
+  "official_threshold_verified": false,
+  "local_loss_below_0_083": false
+}

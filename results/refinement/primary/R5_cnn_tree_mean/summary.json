@@ -1,0 +1,31 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.2012562692825961,
+  "accuracy": 0.9276807980049875,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.21846959839160449,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 0.010874260866420694,
+  "name": "R5_cnn_tree_mean",
+  "fold_losses": [
+    0.1906628442982025,
+    0.2121293945645148,
+    0.20403414114362,
+    0.1967231209524268,
+    0.20273645662975276
+  ],
+  "fold_std": 0.007223606612848655,
+  "data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "evaluation_source": {
+    "src/refinement/evaluate.py": "06b54b189680a895e815f89da95ed34e025f72a362160815cd8407cc7e40459b",
+    "src/refinement/context.py": "58d6aac6ffb0e948ed384259f7a31efee9dff4553676a0a4bbad0d133d5a184d"
+  },
+  "official_kaggle_score": null,
+  "official_threshold_verified": false,
+  "local_loss_below_0_083": false,
+  "weights": {
+    "R1_global": 0.3333333333333333,
+    "R2_local": 0.3333333333333333,
+    "R3_radar_trees": 0.3333333333333333
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "candidate": "R4_cnn_mean_empirical_context",
+  "rows": 8424,
+  "sample_ids_exact_order": true,
+  "probability_min": 1e-07,
+  "probability_max": 0.9999996665859859,
+  "full_inference_path_held_out_replays": [
+    {
+      "fold": 0,
+      "rows": 321,
+      "maximum_probability_difference": 0.0,
+      "matching_angles": 156
+    },
+    {
+      "fold": 1,
+      "rows": 321,
+      "maximum_probability_difference": 0.0,
+      "matching_angles": 144
+    },
+    {
+      "fold": 2,
+      "rows": 321,
+      "maximum_probability_difference": 0.0,
+      "matching_angles": 159
+    },
+    {
+      "fold": 3,
+      "rows": 321,
+      "maximum_probability_difference": 0.0,
+      "matching_angles": 149
+    },
+    {
+      "fold": 4,
+      "rows": 320,
+      "maximum_probability_difference": 0.0,
+      "matching_angles": 156
+    }
+  ],
+  "submission_sha256": "5b9e33bb7fac1b1090bad9aaddb4a72a9a43511cabfbed1b4c8c032082c3da37",
+  "official_kaggle_score": null,
+  "official_threshold_verified": false
+}

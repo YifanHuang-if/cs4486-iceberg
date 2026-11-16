@@ -1,0 +1,7 @@
+{
+  "protocol": "angle_grouped",
+  "folds_sha256": "256275d9414be88640a6c4cc5fa4b790f7e6474297e6343da140b257da018a68",
+  "n_samples": 1604,
+  "official_score_available": false,
+  "selection_warning": "This is development CV. CNN epochs and model comparisons reuse validation labels; adaptive additions are disclosed in the plan."
+}
