@@ -1,0 +1,13 @@
+{
+  "submission": "work\\submissions\\final_fast_s0.csv",
+  "rows": 8424,
+  "ids_match_order": true,
+  "issues": [],
+  "valid": true,
+  "min": 0.001,
+  "max": 0.999,
+  "mean": 0.42076399049627256,
+  "median": 0.29152875570000003,
+  "share_below_0.1": 0.38758309591642925,
+  "share_above_0.9": 0.2553418803418803
+}
