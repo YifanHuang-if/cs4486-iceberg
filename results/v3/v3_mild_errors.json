@@ -1,0 +1,32 @@
+{
+  "name": "v3_mild",
+  "subgroups": [
+    {
+      "group": "exact_angle_match",
+      "rows": 764,
+      "log_loss": 0.025089777894366026,
+      "total_loss_share": 0.10353943609658221
+    },
+    {
+      "group": "near_angle_only",
+      "rows": 697,
+      "log_loss": 0.23426821388176516,
+      "total_loss_share": 0.8819861482576221
+    },
+    {
+      "group": "far_angle",
+      "rows": 10,
+      "log_loss": 0.26727290226545153,
+      "total_loss_share": 0.014436787022441866
+    },
+    {
+      "group": "missing_angle",
+      "rows": 133,
+      "log_loss": 5.237826021781981e-05,
+      "total_loss_share": 3.7628623353825026e-05
+    }
+  ],
+  "top_10_loss_share": 0.31599866258917453,
+  "top_25_loss_share": 0.522335228027851,
+  "confident_wrong_rows": 19
+}
