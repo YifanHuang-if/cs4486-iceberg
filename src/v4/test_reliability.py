@@ -31,6 +31,29 @@ class ReliabilityTests(unittest.TestCase):
         self.assertGreater(c2[0], c1[0])
         self.assertGreater(a2[0], a1[0])
 
+    def test_tiny_reliability_is_continuous(self):
+        model = np.array([.9, .1])
+        angle = np.array([.2, .8])
+        got = gated_fuse(model, angle, np.array([1e-10, 1e-10]))
+        np.testing.assert_allclose(got, model, atol=1e-9, rtol=0)
+
+    def test_gate_one_matches_v3_full_fusion(self):
+        from src.v3.fusion import logit, sigmoid
+        model = np.array([.7, .2])
+        angle = np.array([.9, .3])
+        got = gated_fuse(model, angle, np.ones(2))
+        expected = sigmoid(.75 * logit(model) + logit(angle))
+        np.testing.assert_allclose(got, expected, atol=1e-12)
+
+    def test_gate_interpolates_in_log_odds(self):
+        model = np.array([.8])
+        angle = np.array([.25])
+        low = gated_fuse(model, angle, np.array([0.]))[0]
+        mid = gated_fuse(model, angle, np.array([.5]))[0]
+        high = gated_fuse(model, angle, np.array([1.]))[0]
+        self.assertLess(high, mid)
+        self.assertLess(mid, low)
+
     def test_invalid_parameters_raise(self):
         with self.assertRaises(ValueError):
             gated_prior([30.], [1], [30.], tau=0)
