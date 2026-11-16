@@ -54,6 +54,17 @@ class ReliabilityTests(unittest.TestCase):
         self.assertLess(high, mid)
         self.assertLess(mid, low)
 
+    def test_exact_preservation_and_neighbor_gating(self):
+        angles = np.array([30., 30., 30.4])
+        labels = np.array([1, 1, 0])
+        query = np.array([30., 30.01])
+        prior, preserved = gated_prior(angles, labels, query, preserve_exact=True)
+        normal_prior, default = gated_prior(angles, labels, query)
+        self.assertAlmostEqual(preserved[0], 1.)
+        self.assertLess(default[0], 1.)
+        self.assertLess(preserved[1], 1.)
+        np.testing.assert_allclose(prior, normal_prior)
+
     def test_invalid_parameters_raise(self):
         with self.assertRaises(ValueError):
             gated_prior([30.], [1], [30.], tau=0)
