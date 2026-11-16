@@ -1,0 +1,27 @@
+[
+  {
+    "path": "outputs/refinement/primary/R6_frozen_resnet/fold_0.npz",
+    "bytes": 15680,
+    "sha256": "5f492cec7ac86481bbf7535abab84ec4d17a00d3500a0343c549b79c03b6b4ff"
+  },
+  {
+    "path": "outputs/refinement/primary/R6_frozen_resnet/fold_1.npz",
+    "bytes": 15680,
+    "sha256": "9ba039c4261e62ee78da85f131c58b177dcea6a750801922db5a31e27229f471"
+  },
+  {
+    "path": "outputs/refinement/primary/R6_frozen_resnet/fold_2.npz",
+    "bytes": 15680,
+    "sha256": "883d78416e699cdbb77fc0cce24a71f351ef78ac334dab37ea39f79079565566"
+  },
+  {
+    "path": "outputs/refinement/primary/R6_frozen_resnet/fold_3.npz",
+    "bytes": 15680,
+    "sha256": "5fb45bbf2dcb4b5b98e1cdc952959c04bbcc60638f3224e140a03a63115304c8"
+  },
+  {
+    "path": "outputs/refinement/primary/R6_frozen_resnet/fold_4.npz",
+    "bytes": 15680,
+    "sha256": "31299b381d7155fc30af14e84fbed68383a0a319b4acaf52ed87f7c450386a8a"
+  }
+]

@@ -1,0 +1,5 @@
+-r requirements-steps78.txt
+catboost==1.2.8
+scipy==1.17.0
+ijson==3.4.0.post0
+torchvision==0.20.1+cpu

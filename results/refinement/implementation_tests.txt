@@ -1,0 +1,29 @@
+test_augmentation_pairing_and_rng_isolation (test_refinement.RefinementTests.test_augmentation_pairing_and_rng_isolation) ... ok
+test_context_excludes_fit_ids_and_unseen_groups (test_refinement.RefinementTests.test_context_excludes_fit_ids_and_unseen_groups) ... ok
+test_empirical_context_and_candidate_validation (test_refinement.RefinementTests.test_empirical_context_and_candidate_validation) ... ok
+test_features_independent_of_other_samples (test_refinement.RefinementTests.test_features_independent_of_other_samples) ... ok
+test_fold_local_imputation_and_normalization (test_refinement.RefinementTests.test_fold_local_imputation_and_normalization) ... ok
+test_saved_linear_classifier_matches_pipeline (test_refinement.RefinementTests.test_saved_linear_classifier_matches_pipeline) ... ok
+test_streaming_metadata_matches_training_extractor (test_refinement.RefinementTests.test_streaming_metadata_matches_training_extractor) ... ok
+test_trainable_and_batch_independent_evaluation (test_refinement.RefinementTests.test_trainable_and_batch_independent_evaluation) ... ok
+test_tta_group_invariance (test_refinement.RefinementTests.test_tta_group_invariance) ... ok
+test_context_inverse_recovers_unclipped_probabilities (test_refinement_round2.RoundTwoTests.test_context_inverse_recovers_unclipped_probabilities) ... ok
+test_context_never_reads_held_out_labels_and_requires_disjoint_ids (test_refinement_round2.RoundTwoTests.test_context_never_reads_held_out_labels_and_requires_disjoint_ids) ... ok
+test_new_models_train_and_have_batch_independent_inference (test_refinement_round2.RoundTwoTests.test_new_models_train_and_have_batch_independent_inference) ... ok
+test_pooling_uses_only_query_predictions_and_preserves_singletons (test_refinement_round2.RoundTwoTests.test_pooling_uses_only_query_predictions_and_preserves_singletons) ... ok
+test_augmentation_alignment_and_rng_isolation (test_steps78.Steps78Tests.test_augmentation_alignment_and_rng_isolation) ... ok
+test_baseline_parameters_and_outputs_match (test_steps78.Steps78Tests.test_baseline_parameters_and_outputs_match) ... ok
+test_fold_id_alignment_and_line_endings (test_steps78.Steps78Tests.test_fold_id_alignment_and_line_endings) ... ok
+test_interrupted_training_reproduces_continuous_run (test_steps78.Steps78Tests.test_interrupted_training_reproduces_continuous_run) ... DONE synthetic_resume fold=0 loss=0.68960 epoch=3 seconds=0.9
+Resume synthetic_resume fold=0 after epoch=1
+DONE synthetic_resume fold=0 loss=0.68960 epoch=3 seconds=0.2
+ok
+test_missing_indicator_ablation (test_steps78.Steps78Tests.test_missing_indicator_ablation) ... ok
+test_probability_loss_and_weighted_pooling (test_steps78.Steps78Tests.test_probability_loss_and_weighted_pooling) ... ok
+test_shared_image_initialization_is_preserved (test_steps78.Steps78Tests.test_shared_image_initialization_is_preserved) ... ok
+test_training_only_preprocessing (test_steps78.Steps78Tests.test_training_only_preprocessing) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 2.510s
+
+OK

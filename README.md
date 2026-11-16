@@ -1,5 +1,17 @@
 # CS4486 Iceberg Classification
 
+## Refinement checkpoint (2026-11-16)
+
+The current best CNN ensemble with training-fold-only empirical odds and unlabelled query-group pooling reaches full development five-fold Log Loss **0.13136**, compared with the prior V4 **0.22683** on the same primary split. This is **not an official Kaggle score**; the requested private Score < 0.083 is unverified. The individual local CNN also completed the separate grouped check at **0.19730**. Further architectures are paused and excluded from the best full-fold result.
+
+- [Measured results and limitations](docs/REFINEMENT_RESULTS.md)
+- [Plan and adaptive additions](docs/REFINEMENT_PLAN.md)
+- [Reproduce, resume and generate predictions](docs/REFINEMENT_RUN.md)
+- [All primary comparisons](results/refinement/primary/comparison.csv), [run status](results/refinement/run_status.json) and [verification](results/refinement/verification.json)
+- [Current best configuration](results/refinement/current_best.json), [all context studies](results/refinement/studies/comparison.csv) and [second-round plan](docs/REFINEMENT_ROUND2_PLAN.md)
+
+The existing baseline, primary folds and V-series results are preserved.
+
 Competition: https://www.kaggle.com/competitions/statoil-iceberg-classifier-challenge
 
 ## Setup and exploratory analysis

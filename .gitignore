@@ -35,6 +35,7 @@ sample_submission.csv
 *.npz
 # Steps 7-8 per-sample evidence is distributed in the companion bundle
 /results/steps78/**/oof_predictions.csv
+/results/refinement/**/oof_predictions.csv
 /data/splits/folds_angle_grouped_steps78.csv
 # OS files
 .DS_Store

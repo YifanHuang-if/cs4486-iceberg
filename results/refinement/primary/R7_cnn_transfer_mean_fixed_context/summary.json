@@ -1,0 +1,36 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.15885257853066737,
+  "accuracy": 0.9413965087281796,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.17048051231578942,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 0.03024588230574582,
+  "name": "R7_cnn_transfer_mean_fixed_context",
+  "fold_losses": [
+    0.15340848030496898,
+    0.1671725249579893,
+    0.15301894980681488,
+    0.16464940915780324,
+    0.15600465639418254
+  ],
+  "fold_std": 0.005909396385501785,
+  "data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "evaluation_source": {
+    "src/refinement/evaluate.py": "06b54b189680a895e815f89da95ed34e025f72a362160815cd8407cc7e40459b",
+    "src/refinement/context.py": "58d6aac6ffb0e948ed384259f7a31efee9dff4553676a0a4bbad0d133d5a184d"
+  },
+  "official_kaggle_score": null,
+  "official_threshold_verified": false,
+  "local_loss_below_0_083": false,
+  "base_model": "R7_cnn_transfer_mean",
+  "matching_samples": 764,
+  "fold_prior_strengths": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "empirical": false
+}

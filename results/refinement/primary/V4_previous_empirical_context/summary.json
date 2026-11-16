@@ -1,0 +1,36 @@
+{
+  "samples": 1604,
+  "oof_log_loss": 0.16454071440663506,
+  "accuracy": 0.933291770573566,
+  "observed_angle_samples": 1471,
+  "observed_angle_log_loss": 0.17791991350627143,
+  "missing_angle_samples": 133,
+  "missing_angle_log_loss": 0.016564760455017678,
+  "name": "V4_previous_empirical_context",
+  "fold_losses": [
+    0.13814710774355254,
+    0.171481941222104,
+    0.17412316550260548,
+    0.20590019075556937,
+    0.1329527619731024
+  ],
+  "fold_std": 0.026627164916659007,
+  "data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "evaluation_source": {
+    "src/refinement/evaluate.py": "06b54b189680a895e815f89da95ed34e025f72a362160815cd8407cc7e40459b",
+    "src/refinement/context.py": "58d6aac6ffb0e948ed384259f7a31efee9dff4553676a0a4bbad0d133d5a184d"
+  },
+  "official_kaggle_score": null,
+  "official_threshold_verified": false,
+  "local_loss_below_0_083": false,
+  "base_model": "V4_previous",
+  "matching_samples": 764,
+  "fold_prior_strengths": [
+    0.03955523905889198,
+    0.03965953732090276,
+    0.031752338282041076,
+    0.03070434864602389,
+    0.03220982921856813
+  ],
+  "empirical": true
+}

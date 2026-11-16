@@ -1,0 +1,26 @@
+{
+  "config": {
+    "name": "R6_frozen_resnet",
+    "C_candidates": [
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "inner_folds": 3,
+    "seed": 42,
+    "resnet_input_size": 128
+  },
+  "base_commit": "f8c9ff017fe8a818784b5e8e02791543f3a31c2e",
+  "protocol": "angle_grouped",
+  "data_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "folds_sha256": "256275d9414be88640a6c4cc5fa4b790f7e6474297e6343da140b257da018a68",
+  "pretrained_source": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+  "pretrained_parameters_official": 11689512,
+  "pretrained_dataset": "ImageNet-1K",
+  "backbone_frozen": true,
+  "source": {
+    "src/refinement/transfer.py": "1f47bf1099b7095a4fe28bb90584a11c6cf8ef38e9860c72835bbf80162bd6f2",
+    "src/refinement/features.py": "112aecfb21afa07166999c74452c096ac6068ce7f5ee7ca828631aa6ddbef40a"
+  }
+}

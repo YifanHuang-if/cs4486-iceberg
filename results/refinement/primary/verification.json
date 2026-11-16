@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "checkpoints_replayed": 20,
+  "runs": [
+    {
+      "name": "R1_global",
+      "protocol": "primary",
+      "samples": 1604,
+      "checkpoints_replayed": 5,
+      "maximum_probability_difference": 0.0,
+      "oof_log_loss": 0.1995737632844357,
+      "passed": true
+    },
+    {
+      "name": "R2_local",
+      "protocol": "primary",
+      "samples": 1604,
+      "checkpoints_replayed": 5,
+      "maximum_probability_difference": 0.0,
+      "oof_log_loss": 0.194271512749984,
+      "passed": true
+    },
+    {
+      "name": "R3_radar_trees",
+      "protocol": "primary",
+      "samples": 1604,
+      "checkpoints_replayed": 5,
+      "maximum_probability_difference": 0.0,
+      "oof_log_loss": 0.27605653487071896,
+      "passed": true
+    },
+    {
+      "name": "R6_frozen_resnet",
+      "protocol": "primary",
+      "samples": 1604,
+      "checkpoints_replayed": 5,
+      "maximum_probability_difference": 0.0,
+      "oof_log_loss": 0.3337647561833044,
+      "passed": true
+    }
+  ]
+}

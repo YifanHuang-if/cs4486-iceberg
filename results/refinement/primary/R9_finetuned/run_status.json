@@ -1,0 +1,14 @@
+{
+  "protocol": "primary",
+  "name": "R9_finetuned",
+  "completed_folds": [],
+  "partial_folds": [],
+  "five_fold_complete": false,
+  "not_started_folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}
