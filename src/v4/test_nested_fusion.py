@@ -3,6 +3,13 @@ import numpy as np
 from src.v4.nested_fusion import select_fit, predict_with_fit
 
 class NestedFusionTests(unittest.TestCase):
+    def test_interpolation_exact_midpoint_missing_and_far(self):
+        from src.v4.angle_interpolation import interpolated_prior
+        p,c=interpolated_prior(np.array([30.,30.,30.04]),np.array([1.,1.,0.]),np.array([30.,30.02,np.nan,80.]))
+        self.assertAlmostEqual(p[0],2.1/2.2)
+        self.assertTrue(c[:2].all());self.assertFalse(c[2:].any())
+        np.testing.assert_allclose(p[2:],[.5,.5])
+
     def test_outer_label_mutation_cannot_change_fit_or_prediction(self):
         a=np.array([30,30,30.01,30.02,31,31.01,31.02,32,32.01,33,33.01,34.],float)
         y=np.array([0,0,0,1,1,1,0,1,1,0,0,1.])
