@@ -68,3 +68,20 @@ environment, covering fold isolation, zero/near-zero gating, full V3
 interpolation, evidence grouping, and invalid parameters. The full evaluator
 still requires saved V3 prediction artifacts and raw competition data to
 produce an actual Kaggle-related score.
+
+## One-command local evaluation
+
+From a Windows PowerShell terminal at the project root, with the V3 saved
+predictions present locally:
+
+```powershell
+.\scripts\run_v4.ps1
+```
+
+The runner checks `work/cache/train.npz`, `work/cache/test.npz`,
+`data/splits/folds.csv`, and all fifteen V3 fold-level prediction files plus
+their metrics files, then runs both test suites and the fixed five-fold
+comparison. It reports precisely which files are missing rather than
+automatically retraining the expensive CNNs. The genuine experiment report is
+written to `results/v4/v4_reliability_fixed.json` only after the required
+artifacts are available.
