@@ -23,7 +23,7 @@ Fixed diagnostic arguments: `sigma=0.02, alpha=0.1, tau=8, distance_scale=0.02`.
 Run from the project root with the V3 predictions and raw data/cache available locally:
 
 ```powershell
-.venv\Scripts\python.exe -m unittest src.v4.test_reliability -v
+.venv\Scripts\python.exe -m unittest src.v4.test_reliability src.v4.test_groups -v
 .venv\Scripts\python.exe -m src.v4.evaluate_reliability --tags v3_mild_s11 v3_global_s29 v3_shape_mlp --name v4_reliability_fixed
 ```
 
@@ -46,3 +46,25 @@ This candidate intentionally leaves V3 files unchanged.
 ## AI usage
 
 ChatGPT proposed and implemented this candidate. The team must inspect, understand, run, and document its results; do not claim student hours or independent implementation where they did not occur.
+
+## Continuity correction and focused subgroup audit
+
+The initial V4 implementation scaled only the angle log-odds, while applying the
+model log-odds weight of 0.75 regardless of how small the reliability gate was.
+That was discontinuous: even nearly zero angle evidence could change a highly
+confident image prediction. The corrected method interpolates in log-odds
+between the unchanged model probability (gate = 0) and the complete V3
+fusion formula (gate = 1). No unverified performance claim is made for this fix.
+
+The V4 evaluator additionally computes four mutually exclusive held-out angle
+evidence groups: exact match, nearby only (nearest training angle < 0.06),
+farther away, and missing. The output records the count, V3 and V4 subgroup
+Log Loss, proportion of total Log Loss, and mean reliability. Evidence groups
+are derived solely from training-side angles and held-out angle values,
+without using held-out labels to form a group.
+
+Eleven synthetic regression tests passed in the isolated Python/NumPy test
+environment, covering fold isolation, zero/near-zero gating, full V3
+interpolation, evidence grouping, and invalid parameters. The full evaluator
+still requires saved V3 prediction artifacts and raw competition data to
+produce an actual Kaggle-related score.
