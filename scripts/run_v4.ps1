@@ -34,4 +34,8 @@ if ($LASTEXITCODE -ne 0) { throw "V4 regression tests failed." }
 & $python -m src.v4.evaluate_reliability --tags v3_mild_s11 v3_global_s29 v3_shape_mlp --name v4_reliability_fixed
 if ($LASTEXITCODE -ne 0) { throw "V4 experiment failed." }
 
+& $python -m src.v4.evaluate_reliability --tags v3_mild_s11 v3_global_s29 v3_shape_mlp --name v4_exact_preserving --preserve-exact
+if ($LASTEXITCODE -ne 0) { throw "V4 exact-preserving ablation failed." }
+
 Write-Host "Saved: results/v4/v4_reliability_fixed.json" -ForegroundColor Green
+Write-Host "Saved: results/v4/v4_exact_preserving.json" -ForegroundColor Green
