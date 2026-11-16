@@ -1,0 +1,49 @@
+{
+  "source": "work\\submissions\\fast_s0.csv",
+  "rows": 8424,
+  "clip": 0.001,
+  "scheme": "kernel",
+  "spread": 0.02,
+  "alpha": 0.1,
+  "weight": 0.6,
+  "oof_model_loss": 0.2500553033333193,
+  "oof_fused_loss": 0.12109207170266059,
+  "oof_coverage": 0.9133416458852868,
+  "tuning_top": [
+    {
+      "scheme": "kernel",
+      "spread": 0.02,
+      "alpha": 0.1,
+      "weight": 0.6,
+      "coverage": 0.9133416458852868,
+      "loss": 0.12109207170266059,
+      "loss_covered": 0.1284438870364735,
+      "loss_uncovered": 0.043607111529740096
+    },
+    {
+      "scheme": "kernel",
+      "spread": 0.02,
+      "alpha": 0.1,
+      "weight": 0.75,
+      "coverage": 0.9133416458852868,
+      "loss": 0.1211429602349122,
+      "loss_covered": 0.12857129806754067,
+      "loss_uncovered": 0.04285148595577028
+    },
+    {
+      "scheme": "kernel",
+      "spread": 0.01,
+      "alpha": 0.1,
+      "weight": 0.75,
+      "coverage": 0.9077306733167082,
+      "loss": 0.12246717110365962,
+      "loss_covered": 0.1289037245369831,
+      "loss_uncovered": 0.05914540219204507
+    }
+  ],
+  "rows_with_prior": 7000,
+  "share_with_prior": 0.8309591642924976,
+  "share_changed": 0.953584995251662,
+  "mean_before": 0.42728711099236705,
+  "mean_after": 0.4207639904959072
+}

@@ -1,0 +1,29 @@
+{
+  "folds": 5,
+  "seed": 42,
+  "rows": 1604,
+  "groups": 1011,
+  "fold_sizes": [
+    321,
+    321,
+    321,
+    321,
+    320
+  ],
+  "fold_ships": [
+    170,
+    170,
+    180,
+    179,
+    152
+  ],
+  "fold_icebergs": [
+    151,
+    151,
+    141,
+    142,
+    168
+  ],
+  "groups_crossing_folds": 0,
+  "path": "D:\\Desktop\\cs4486-iceberg-main (1)\\cs4486-iceberg-main\\work\\splits\\folds_angle_grouped.csv"
+}

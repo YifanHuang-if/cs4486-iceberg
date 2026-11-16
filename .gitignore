@@ -40,3 +40,6 @@ sample_submission.csv
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local scratch: data cache, trained weights, pseudo-labels and submissions
+/work/
