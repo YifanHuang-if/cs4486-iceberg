@@ -7,7 +7,7 @@ import numpy as np
 from src.v3.fusion import logit, sigmoid
 
 def gated_prior(reference_angles, reference_labels, query_angles, *, sigma=.02,
-                alpha=.1, tau=8., distance_scale=.02):
+                alpha=.1, tau=8., distance_scale=.02, preserve_exact=False):
     """Return smoothed angle prior and evidence-dependent confidence."""
     if min(sigma, alpha, tau, distance_scale) <= 0:
         raise ValueError("All hyperparameters must be positive")
@@ -40,6 +40,8 @@ def gated_prior(reference_angles, reference_labels, query_angles, *, sigma=.02,
         reliability = effective / (effective + tau)
         reliability *= np.where(exact_available, 1.,
                                 np.exp(-.5 * (nearest / distance_scale)**2))
+        if preserve_exact:
+            reliability = np.where(exact_available, 1., reliability)
         confidence[indices] = np.where(mass > 1e-3, reliability, 0.)
     return probabilities, np.clip(confidence, 0., 1.)
 
