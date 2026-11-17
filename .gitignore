@@ -41,8 +41,11 @@ sample_submission.csv
 .DS_Store
 Thumbs.db
 
-# Local scratch: data cache, trained weights, pseudo-labels and submissions
-/work/
+# Local scratch: data cache, trained weights, pseudo-labels and submissions.
+# The analysis scripts are source and stay tracked; everything else under work/ is generated.
+/work/*
+!/work/*.py
+/work/__pycache__/
 
 # Reports and experiment outputs are distributed outside the repository.
 # Word reports, result tables, curves and logs belong with the submission
