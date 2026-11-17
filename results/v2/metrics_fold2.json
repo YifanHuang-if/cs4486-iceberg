@@ -1,8 +1,0 @@
-{
-  "fold": 2,
-  "val_log_loss_tta": 0.23351448393620816,
-  "val_log_loss_plain": 0.2467155704979163,
-  "best_epoch": 14,
-  "epochs_run": 50,
-  "params": 953577
-}

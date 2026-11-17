@@ -43,3 +43,10 @@ Thumbs.db
 
 # Local scratch: data cache, trained weights, pseudo-labels and submissions
 /work/
+
+# Reports and experiment outputs are distributed outside the repository.
+# Word reports, result tables, curves and logs belong with the submission
+# bundle, not in version control: every edit stores a new binary blob and
+# reviewers do not want them in pull requests.
+/report/
+/results/
