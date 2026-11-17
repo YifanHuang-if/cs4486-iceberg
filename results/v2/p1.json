@@ -1,9 +1,0 @@
-{
-  "source": "work\\submissions\\final_fast_s0.csv",
-  "threshold": 0.1,
-  "rows": 5416,
-  "share_of_test": 0.6429249762583096,
-  "share_machine_rows_selected": 0.46454948301329396,
-  "iceberg_share": 0.3971565731166913,
-  "out": "work\\pseudo\\p1.npz"
-}

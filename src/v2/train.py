@@ -97,6 +97,23 @@ def transform_images(images: np.ndarray, kind: str, fitted: dict) -> np.ndarray:
     if kind == "local":
         mean = x.mean(axis=(2, 3), keepdims=True, dtype=np.float64).astype(np.float32)
         std = x.std(axis=(2, 3), keepdims=True, dtype=np.float64).astype(np.float32)
+    elif kind == "local_clip":
+        # Radar speckle produces extreme pixels that dominate the z-score of a
+        # small patch. Clip to the central 98% before standardising so the
+        # normalisation reflects the target rather than the tail.
+        low = np.percentile(x, 1, axis=(2, 3), keepdims=True).astype(np.float32)
+        high = np.percentile(x, 99, axis=(2, 3), keepdims=True).astype(np.float32)
+        x = np.clip(x, low, high)
+        mean = x.mean(axis=(2, 3), keepdims=True, dtype=np.float64).astype(np.float32)
+        std = x.std(axis=(2, 3), keepdims=True, dtype=np.float64).astype(np.float32)
+    elif kind == "local_robust":
+        # Median and interquartile range instead of mean and standard deviation.
+        median = np.median(x, axis=(2, 3), keepdims=True).astype(np.float32)
+        q75 = np.percentile(x, 75, axis=(2, 3), keepdims=True).astype(np.float32)
+        q25 = np.percentile(x, 25, axis=(2, 3), keepdims=True).astype(np.float32)
+        x = np.clip(x, q25 - 3.0 * (q75 - q25), q75 + 3.0 * (q75 - q25))
+        mean = median
+        std = np.maximum(q75 - q25, 1e-6)
     else:
         mean = np.asarray(fitted["mean"], dtype=np.float32)[None, :, None, None]
         std = np.asarray(fitted["std"], dtype=np.float32)[None, :, None, None]

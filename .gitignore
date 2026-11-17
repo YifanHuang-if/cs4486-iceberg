@@ -1,4 +1,4 @@
-# Python environments and caches
+﻿# Python environments and caches
 .venv/
 .venv-*/
 venv/
@@ -41,5 +41,15 @@ sample_submission.csv
 .DS_Store
 Thumbs.db
 
-# Local scratch: data cache, trained weights, pseudo-labels and submissions
-/work/
+# Local scratch: data cache, trained weights, pseudo-labels and submissions.
+# The analysis scripts are source and stay tracked; everything else under work/ is generated.
+/work/*
+!/work/*.py
+/work/__pycache__/
+
+# Reports and experiment outputs are distributed outside the repository.
+# Word reports, result tables, curves and logs belong with the submission
+# bundle, not in version control: every edit stores a new binary blob and
+# reviewers do not want them in pull requests.
+/report/
+/results/
