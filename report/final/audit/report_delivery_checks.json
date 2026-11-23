@@ -6,15 +6,21 @@
   "draft_placeholders_removed": true,
   "signature_authorization": "Zheng Hongyu stated that Huang Yifan agreed to signature insertion",
   "category_hours": "Role-based estimates; individual totals supplied by group",
-  "pdf_sha256": "306d9b917add1a50782a5fa9e9a88eeecdf0c69e3cdc9606c0277fb2eebf8bd8",
+  "pdf_sha256": "ebd6b8e1de41632667cb2917f2f4ca2dd856f1a70eb329e3fd9bb0bd7418c545",
   "validation_caveat_retained": true,
   "full_inference_replay_claimed": false,
-  "visual_review": "Latest pages 5-11 rendered and visually inspected; pages 1-4 text unchanged from previously inspected PDF.",
+  "visual_review": "Updated pages 10-11 rendered and inspected; 11 pages retained.",
   "signature": "AI-generated handwriting-style rendering: Huang Yifan / 2026.11.23",
   "signature_asset_sha256": "8cbc14aca8e5f0d4f31e446932a951d1357f9d4b23fcd7c41dc3c2077a03c130",
-  "latest_revision": "Course-template review: factual human/AI contribution distinction and official exploratory ResNet-18 weight/parameter disclosure.",
+  "latest_revision": "Updated member productive hours to user-reported 26, 20, 29; category allocations remain role-based estimates.",
   "score_gap_checked": 0.02016,
   "template_section_coverage": true,
   "full_course_compliance_certified": false,
-  "course_review": "course_requirements_review_20261123.txt"
+  "course_review": "course_requirements_review_20261123.txt",
+  "reported_hours": {
+    "Huang Yifan": 26,
+    "Zheng Hongyu": 20,
+    "Hachiware": 29
+  },
+  "reported_total_hours": 75
 }

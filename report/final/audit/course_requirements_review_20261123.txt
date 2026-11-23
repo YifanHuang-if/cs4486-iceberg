@@ -28,7 +28,7 @@ PASS: course-style title, team name, all three names and IDs, approximately 150-
 PASS: all eleven required sections, references, task and metric, dataset challenges, validation, baseline, improvement comparisons, final results, AI disclosure, reflection, reproducibility discussion, individual profiles and relative contributions.
 PASS: final score pair is Private 0.08708 / Public 0.10724; difference is 0.02016. Public/private results are not mixed across submissions. Late-submission score-level comparison is separated from official rank.
 PASS: final seven-member route is identified as trained from scratch; earlier exploratory ResNet-18 use now includes its official weight identifier, source and 11,689,512-parameter count and is explicitly excluded from the final ensemble.
-PASS: actual user-supplied total hours (8, 6, 7), proportions and category estimates are distinguished; role descriptions follow the supplied step allocation.
+PASS: actual user-supplied total hours (26, 20, 29), proportions and category estimates are distinguished; role descriptions follow the supplied step allocation.
 PASS: report has no draft/TODO/TBD placeholders; no hard maximum page count is stated in the provided course files. Approximate per-section lengths are guidance.
 
 Outstanding substantive matters
