@@ -172,7 +172,12 @@ def run_fold(args,data,fold):
                             weight_decay=args.weight_decay)
     else:
         opt=torch.optim.AdamW(model.parameters(),lr=args.lr,weight_decay=args.weight_decay)
-    scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(opt,T_max=args.epochs,eta_min=args.lr*.01)
+    main_scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(opt,T_max=max(1,args.epochs-args.warmup),eta_min=args.lr*.01)
+    if args.warmup>0:
+        warm=torch.optim.lr_scheduler.LinearLR(opt,start_factor=0.1,end_factor=1.0,total_iters=args.warmup)
+        scheduler=torch.optim.lr_scheduler.SequentialLR(opt,schedulers=[warm,main_scheduler],milestones=[args.warmup])
+    else:
+        scheduler=main_scheduler
     bce=nn.BCEWithLogitsLoss(reduction="none")
     history=[]
     # Exponential moving average of the weights. Small datasets give noisy final
@@ -282,6 +287,8 @@ def main():
                    help="standard deviation of the additive Gaussian augmentation")
     p.add_argument("--subset",choices=["all","no_pure_iceberg"],default="all",
                    help="optionally drop the label-pure iceberg angle block")
+    p.add_argument("--warmup",type=int,default=0,
+                   help="epochs of linear learning-rate warmup before the cosine decay")
     p.add_argument("--initialize-teacher",action="store_true")
     p.add_argument("--validation-only",action="store_true")
     args=p.parse_args()

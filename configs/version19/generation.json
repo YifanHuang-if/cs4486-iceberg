@@ -1,0 +1,27 @@
+{
+  "submission": "version19",
+  "tags": [
+    "v5_shape",
+    "hp_star",
+    "hp_b",
+    "hp_d",
+    "pt25a",
+    "pt25b",
+    "stu5"
+  ],
+  "sigma": 0.012,
+  "alpha": 0.1,
+  "l2": 1.0,
+  "clip": 0.001,
+  "angle_scale": 0.9,
+  "exact_scale": null,
+  "pool_weight": 0.0,
+  "pool_non_exact_only": false,
+  "real_only": true,
+  "submitted_csv_sha256": "48c197c8534315158402997d7449fc30b717c0468ff1424dfbe6ded59ea8c524",
+  "reported_kaggle_private": 0.08708,
+  "reported_kaggle_public": 0.10724,
+  "source": "Supplied VERSION.md, handover README and exported v5_submit.py; original submission manifest omits scale.",
+  "full_replay_verified": false,
+  "generation_command": "python -m work.v5_submit --tags v5_shape hp_star hp_b hp_d pt25a pt25b stu5 --name version19_replay --sigma 0.012 --alpha 0.1 --l2 1.0 --clip 0.001 --angle-scale 0.90 --pool-weight 0.0"
+}

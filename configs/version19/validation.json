@@ -1,0 +1,18 @@
+{
+  "n_folds": 5,
+  "seed": 42,
+  "rng": "numpy.default_rng (PCG64)",
+  "stratification": [
+    "label",
+    "angle_missing"
+  ],
+  "algorithm": "Sort IDs within joint strata, shuffle, distribute round-robin with carried offset",
+  "fold_numbering": "0 through 4",
+  "folds_sha256": "994363cf0ef26b9cdc77db996ee94e981bfeacac7bad47b47360a335a52a9681",
+  "train_file_sha256": "a56756a2528a09b139dc2747e2e40d869f9da7a8c9df37b188b6163f6bfb8696",
+  "candidate_pairs_reviewed": 182,
+  "max_minimum_channel_correlation": 0.8491124447779786,
+  "grouping_threshold": 0.98,
+  "confirmed_groups_larger_than_one": 0,
+  "numpy_version": "2.5.4"
+}

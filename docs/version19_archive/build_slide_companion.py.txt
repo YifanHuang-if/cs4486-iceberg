@@ -1,0 +1,427 @@
+﻿"""Build a slide-by-slide companion that quotes each text block whole.
+
+Every block is reproduced as it appears on the slide (line breaks kept), followed
+by a Chinese translation and a note on which data values it refers to.
+"""
+from __future__ import annotations
+
+from pathlib import Path
+
+from docx import Document
+from docx.shared import Pt, RGBColor
+
+OUT = Path(r"D:\Desktop\CS4486_PPT_閫愰〉閫氫織瑙ｉ噴.docx")
+
+ACCENT = RGBColor(0xC0, 0x00, 0x00)
+GREY = RGBColor(0x40, 0x40, 0x40)
+DARK = RGBColor(0x1F, 0x38, 0x64)
+CHROME = "锛堢増寮忔枃瀛楋紝涓嶈鍏ュ唴瀹癸級"
+
+SLIDES: list[tuple[str, list[tuple[str, str, str]]]] = [
+    ("绗?1 椤?路 灏侀潰", [
+        ("CS4486 鈥?PROJECT", CHROME, "鏃?),
+        ("Iceberg Classification\nUsing Radar Images and Angles",
+         "鍐板北鍒嗙被锛氫娇鐢ㄩ浄杈惧浘鍍忎笌瑙掑害",
+         "鏃犮€傛湰椤靛彧鏈夐鐩紝涓嶈鏁版嵁銆?),
+        ("From a small CNN baseline to angle priors, model blending and student models",
+         "浠庝竴涓皬鍨?CNN 鍩虹嚎锛屽埌瑙掑害鍏堥獙銆佹ā鍨嬭瀺鍚堜笌瀛︾敓妯″瀷",
+         "鏃犮€傛鎷柟娉曟紨杩涢『搴忋€?),
+        ("TEAM", "鍥㈤槦", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Huang Yifan   72400438   Team leader\nZheng Hongyu   72400229\nWu Kunze   72400463",
+         "榛勪害鍑?72400438锛堢粍闀匡級锛忛儜楦垮畤 72400229锛忓惔鍧ゆ辰 72400463",
+         "鏃犮€傜粍鍛樹笌瀛﹀彿銆?),
+        ("COMPETITION", "姣旇禌", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Statoil/C-CORE\nIceberg Classifier Challenge",
+         "Statoil锛廋-CORE 鍐板北鍒嗙被鎸戞垬璧?, "鏃犮€傛瘮璧涘悕绉般€?),
+        ("DATE", "鏃ユ湡", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("24 November 2026", "2026 骞?11 鏈?24 鏃?, "鏃犮€傚睍绀烘棩鏈熴€?),
+        ("TAGLINE", "涓€鍙ヨ瘽涓诲紶", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Predict iceberg probabilities with lower Log Loss",
+         "鐢ㄦ洿浣庣殑 Log Loss 棰勬祴鍑哄啺灞辩殑姒傜巼",
+         "鐩爣锛氳娴嬭瘯闆?8,424 琛岀殑棰勬祴姒傜巼鏇村噯銆?),
+        ("CITYU-DG\nFinal Presentation\nCS4486\n01", CHROME, "鏃?),
+    ]),
+    ("绗?2 椤?路 椤圭洰璺嚎鍥?, [
+        ("CS4486 PROJECT\nOur Project Roadmap\nPROJECT OVERVIEW",
+         "CS4486 椤圭洰 路 鎴戜滑鐨勯」鐩矾绾垮浘 路 椤圭洰鎬昏",
+         "鏃犮€傛湰椤垫槸鐩綍銆?),
+        ("FIRST VERSION\nAnalyze the data, fix five folds and train a CNN baseline.\n"
+         "Test flips, dropout, angle input and a missing-angle flag.",
+         "绗竴闃舵锛堢涓€鐗堬級锛氬垎鏋愭暟鎹€佸浐瀹氫簲鎶樸€佽缁?CNN 鍩虹嚎锛涘啀鍒嗗埆璇曞浘鍍忕炕杞€乨ropout銆?
+         "瑙掑害杈撳叆鍜岀己澶辫搴︽爣璁般€?,
+         "鍙璁粌闆?1,604 琛岋細鐢?band_1/band_2 浣滆緭鍏ャ€乮s_iceberg 浣滅瓟妗堛€佹寜 inc_angle 鍒嗕簲鎶樸€?
+         "娴嬭瘯闆嗗畬鍏ㄤ笉鍙備笌銆?),
+        ("LATER UPDATES\nAdd angle priors, model blending and soft-label training.\n"
+         "Tune the model, compare scores and study remaining errors.",
+         "绗簩闃舵锛堝悗缁洿鏂帮級锛氬姞鍏ヨ搴﹀厛楠屻€佹ā鍨嬭瀺鍚堜笌杞爣绛捐缁冿紱璋冨弬銆佹瘮鍒嗘暟銆佸垎鏋愭畫浣欓敊璇€?,
+         "浠嶇敤璁粌闆嗚缁冮獙璇侊紱鏂板鐨勬槸鎶婃祴璇曢泦 8,424 琛岀殑鍥惧儚閫佽繘妯″瀷鍙栨鐜囦綔杞爣绛俱€?),
+        ("01\nTask &\nmetric", "绗竴姝ワ細浠诲姟涓庢寚鏍?,
+         "鏃犮€傚畾涔夎緭鍏ユ槸鍥惧儚+瑙掑害銆佽緭鍑烘槸姒傜巼銆佺敤 Log Loss 鎵撳垎銆?),
+        ("Predict iceberg probability\nfrom radar images.\nMetric: Log Loss.",
+         "浠庨浄杈惧浘鍍忛娴嬪啺灞辨鐜囷紝鎸囨爣涓?Log Loss銆?,
+         "鍒嗘暟鍦ㄨ缁冮泦 1,604 琛屼笂鐢ㄤ簲鎶樻姌澶栭娴嬭绠椼€?),
+        ("02\nData &\nchallenges", "绗簩姝ワ細鏁版嵁涓庢寫鎴?, "鏃犮€?),
+        ("Check the data and missing angles.\nSet five validation folds and keep them fixed.",
+         "妫€鏌ユ暟鎹笌缂哄け瑙掑害锛涜瀹氫簲鎶樺苟淇濇寔涓嶅彉銆?,
+         "鐢ㄨ缁冮泦 inc_angle 鍒楁暟鍑?133 琛屼负绌猴紝鍐嶆寜鏍囩涓庣己澶卞垎灞傚垏浜旀姌锛屽瓨鎴?folds.csv銆?),
+        ("03\nBaseline", "绗笁姝ワ細鍩虹嚎",
+         "鏃犮€?),
+        ("Train a small CNN.\nScore every row once, on data the model never saw.\nCompare changes fairly.",
+         "璁粌涓€涓皬 CNN锛涜姣忎竴琛岄兘琚€屾病瑙佽繃瀹冦€嶇殑妯″瀷鎵撲竴娆″垎锛涘叕骞虫瘮杈冩敼鍔ㄣ€?,
+         "璁粌闆嗕簲鎶橈細姣忔姌鐢?4 浠借缁冦€? 浠介娴嬶紝1,604 琛屽悇寰椾竴涓姌澶栨鐜囷紝寰楀埌 OOF 0.26063銆?),
+        ("04\nModel\nimprovements", "绗洓姝ワ細妯″瀷鏀硅繘", "鏃犮€?),
+        ("Add angle priors, blend predictions\nand retrain models on soft labels.",
+         "鍔犲叆瑙掑害鍏堥獙銆佽瀺鍚堥娴嬶紝骞剁敤杞爣绛鹃噸鏂拌缁冩ā鍨嬨€?,
+         "鍏堥獙鏉ヨ嚜璁粌闆?inc_angle+is_iceberg锛涜蒋鏍囩鏉ヨ嚜娴嬭瘯闆嗗浘鍍忕殑姒傜巼锛堟棤鏍囩锛夈€?),
+        ("05\nResults &\nreflection", "绗簲姝ワ細缁撴灉涓庡弽鎬?, "鏃犮€?),
+        ("Compare scores and\nthe Top-5 target.\nExplain errors and limits.",
+         "姣旇緝鍒嗘暟涓庡巻鍙插墠浜旂洰鏍囷紱瑙ｉ噴閿欒涓庡眬闄愩€?,
+         "鍒嗘暟鏄祴璇曢泦鐨勭姒滃€硷紱閿欒鍒嗘瀽鐢ㄨ缁冮泦鐨勬姌澶栭娴嬨€?),
+        ("CS4486 Final Presentation\n02", CHROME, "鏃?),
+    ]),
+    ("绗?3 椤?路 浠诲姟涓庢寚鏍?, [
+        ("CS4486 PROJECT\n1. Task Description & Metric\nRADAR CLASSIFICATION",
+         "CS4486 椤圭洰 路 1. 浠诲姟鎻忚堪涓庢寚鏍?路 闆疯揪鍒嗙被", "鏃犮€?),
+        ("COMPETITION SNAPSHOT", "姣旇禌蹇収", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Statoil / C-CORE challenge\nClassify satellite radar images\nSupport safer navigation",
+         "Statoil锛廋-CORE 鎸戞垬璧涳紱瀵瑰崼鏄熼浄杈惧浘鍍忓垎绫伙紱鏈嶅姟浜庢洿瀹夊叏鐨勮埅琛屻€?,
+         "鏃犮€傝儗鏅鏄庛€?),
+        ("Two bands of the same object", "鍚屼竴鐩爣鐨勪袱绉嶆尝娈?, "鏃狅紙鍥炬敞鏍囬锛夈€?),
+        ("PREDICTION SETUP", "棰勬祴璁剧疆", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Classify: iceberg or ship\nInputs: HH, HV and incidence angle\nOutput: iceberg probability\n"
+         "CSV columns: id, is_iceberg",
+         "鍒嗙被鐩爣锛氬啺灞辨垨鑸癸紱杈撳叆锛欻H銆丠V 涓や釜娉㈡涓庡叆灏勮锛涜緭鍑猴細鍐板北姒傜巼锛涙彁浜ゅ垪锛歩d 涓?is_iceberg銆?,
+         "妯″瀷璇昏缁冮泦鐨?band_1锛圚H锛夈€乥and_2锛圚V锛夈€乮nc_angle锛涚瓟妗堝彇 is_iceberg锛涙彁浜ゅ彧浜?id 涓庢鐜囥€?),
+        ("OFFICIAL METRIC", "瀹樻柟鎸囨爣", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Log Loss\nLower is better\nA confident wrong call is costly at sea, so the metric punishes overconfidence.",
+         "Log Loss锛氳秺浣庤秺濂姐€傛捣涓婁竴娆¤嚜淇＄殑閿欒浠ｄ环寰堥珮锛屾墍浠ヨ繖涓寚鏍囨儵缃氳繃搴﹁嚜淇°€?,
+         "璁＄畻鐢ㄩ娴嬫鐜囦笌鐪熷疄鏍囩锛堣缁冮泦鏈?is_iceberg锛屾祴璇曢泦鐪嬩笉鍒帮級銆?),
+        ("PROJECT GOAL", "椤圭洰鐩爣", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Beat a reproducible CNN baseline by treating incidence angle as evidence.\n"
+         "Compare against the historical Top-5. Stretch goal: private < 0.08883.",
+         "鎶婂叆灏勮褰撲綔璇佹嵁锛岃秴杩囦竴涓彲澶嶇幇鐨?CNN 鍩虹嚎锛涘苟涓庡巻鍙插墠浜旀瘮杈冿紝鍐插埡绉佹浣庝簬 0.08883銆?,
+         "瑕佽秴杩囩殑鍩虹嚎鏄缁冮泦涓婄畻鐨?0.26063锛涘鐓х嚎鏄巻鍙插墠浜旂姒?0.08883銆?),
+        ("Top: a ship. Bottom: an iceberg.\nEach shown in both radar bands (HH, HV).",
+         "涓婃帓鏄埞锛屼笅鎺掓槸鍐板北锛涘悇鑷睍绀?HH銆丠V 涓や釜娉㈡銆?,
+         "浠庤缁冮泦鍚勫彇 1 鏉?is_iceberg=0 涓?=1 鐨勮锛岀敾瀹冧滑鐨?band_1銆乥and_2銆?),
+        ("CS4486 Final Presentation\n03", CHROME, "鏃?),
+    ]),
+    ("绗?4 椤?路 鏁版嵁鍒嗘瀽涓庢寫鎴?, [
+        ("CS4486 PROJECT\n2. Data Analysis & Challenges\nDATA AND VALIDATION",
+         "CS4486 椤圭洰 路 2. 鏁版嵁鍒嗘瀽涓庢寫鎴?路 鏁版嵁涓庨獙璇?, "鏃犮€?),
+        ("Training labels", "璁粌鏍囩鍒嗗竷", "鎸囪缁冮泦 is_iceberg 鍒椼€?),
+        ("53.1% ships / 46.9% icebergs\nThe classes are fairly balanced.",
+         "鑸?53.1%銆佸啺灞?46.9%锛岀被鍒熀鏈潎琛°€?,
+         "璁粌闆?1,604 琛屼腑 is_iceberg=0 鏈?851 琛屻€?1 鏈?753 琛岋紝鐩搁櫎寰楀埌杩欎袱涓瘮渚嬨€?),
+        ("DATASET PROFILE", "鏁版嵁姒傚喌", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("1,604 train / 8,424 test samples\nTwo 75 脳 75 images + angle\nNormalize using each training fold",
+         "璁粌 1,604 鏉°€佹祴璇?8,424 鏉★紱姣忔潯涓ゅ紶 75脳75 鍥惧儚鍔犺搴︼紱鐢ㄥ悇鑷殑璁粌鎶樼畻褰掍竴鍖栥€?,
+         "1,604/8,424 鏄袱浠芥枃浠惰鏁帮紱褰掍竴鍖栧潎鍊兼柟宸彧鍙栧綋鍓嶆姌璁粌琛岀殑鍍忕礌銆?),
+        ("MAIN CHALLENGES", "涓昏鎸戞垬", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Small, noisy radar dataset\n133 missing train angles\nTest angles are complete",
+         "鏁版嵁閲忓皬涓斿櫔澹板ぇ锛涜缁冮泦鏈?133 鏉¤搴︾己澶憋紱娴嬭瘯闆嗚搴﹀畬鏁淬€?,
+         "133 = 璁粌闆?inc_angle 涓虹┖鐨勮鏁帮紱銆屽畬鏁淬€? 娴嬭瘯闆?8,424 琛岀殑 inc_angle 鏃犵┖鍊笺€?),
+        ("TAKEAWAY", "鍏抽敭缁撹", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Exact-angle rows almost always share a label (98.6%).\nNearby angles agree only 84% of the time.\n"
+         "So we flag missing angles and treat the two cases separately.",
+         "瑙掑害瀹屽叏鐩稿悓鐨勮鍑犱箮鎬绘槸鍚屼竴鏍囩锛?8.6%锛夛紱鍙湁閭昏繎瑙掑害鏃朵竴鑷寸巼浠呯害 84%銆?
+         "鍥犳鎴戜滑鏍囪缂哄け瑙掑害锛屽苟鎶婅繖涓ょ被鍒嗗紑澶勭悊銆?,
+         "鐢ㄨ缁冮泦 inc_angle + is_iceberg锛氬悓瑙掑害鍒嗙粍缁熻缁勫唴涓€鑷寸巼 98.6%锛涘彇鏈€杩戜絾涓嶅悓鐨勮搴︾粺璁″緱绾?84%銆?),
+        ("Missing-angle shift", "缂哄け瑙掑害鐨勫亸绉?, "鏃狅紙灏忓崱鏍囬锛夈€?),
+        ("133 missing train angles, all ships", "璁粌闆?133 鏉＄己澶辫搴﹀叏閮ㄦ槸鑸?,
+         "鍦ㄩ偅 133 琛屼笂鏌?is_iceberg锛屽叏閮ㄤ负 0锛涙祴璇曢泦娌℃湁缂哄け瑙掑害锛屾墍浠ヤ笉鍙縼绉汇€?),
+        ("Use the same five folds", "浣跨敤鍚屼竴濂椾簲鎶?, "鏃狅紙灏忓崱鏍囬锛夈€?),
+        ("About 321 validation samples per fold", "姣忔姌绾?321 鏉￠獙璇佹牱鏈?,
+         "璁粌闆?1,604 琛屽垎涓?321/321/321/321/320銆?),
+        ("Extra check: group by angle", "棰濆妫€鏌ワ細鎸夎搴﹀垎缁?, "鏃狅紙灏忓崱鏍囬锛夈€?),
+        ("Put equal-angle samples in the same fold", "鎶婂悓瑙掑害鏍锋湰鏀捐繘鍚屼竴鎶?,
+         "鐢ㄨ缁冮泦 inc_angle 鎶婅搴︾浉鍚岀殑琛岀粦鍦ㄤ竴璧峰啀鍒嗘姌锛岄噸鏂拌缁冧互妫€楠屾槸鍚﹂潬鍚岃搴︽硠婕忋€?),
+        ("CS4486 Final Presentation\n04", CHROME, "鏃?),
+    ]),
+    ("绗?5 椤?路 鍩虹嚎妯″瀷", [
+        ("CS4486 PROJECT\n3. Baseline Model\nFIVE-FOLD BASELINE",
+         "CS4486 椤圭洰 路 3. 鍩虹嚎妯″瀷 路 浜旀姌鍩虹嚎", "鏃犮€?),
+        ("BASELINE PIPELINE", "鍩虹嚎娴佺▼", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("60,433 parameters, trained from scratch",
+         "60,433 涓弬鏁帮紝浠庨浂寮€濮嬭缁?,
+         "鍙傛暟涓暟锛屼笉鏄暟鎹噺锛涜緭鍏ヤ粛鏉ヨ嚜璁粌闆嗗浘鍍忋€?),
+        ("Preprocess\nScale within\neach fold", "棰勫鐞嗭細鍦ㄦ瘡涓€鎶樺唴閮ㄥ仛缂╂斁",
+         "鐢ㄥ綋鍓嶆姌璁粌琛岀殑鍍忕礌鍧囧€间笌鏍囧噯宸缉鏀撅紱楠岃瘉琛屽彧琚缉鏀俱€?),
+        ("Radar input\nHH + HV\n75 脳 75", "闆疯揪杈撳叆锛欻H + HV锛屽昂瀵?75脳75",
+         "璁粌闆嗘瘡琛岀殑 band_1 涓?band_2 杩樺師鎴?75脳75 涓や釜閫氶亾銆?),
+        ("Model\n3 conv blocks\n16 / 32 / 64", "妯″瀷锛? 涓嵎绉潡锛岄€氶亾 16/32/64", "鏃犮€傜粨鏋勬弿杩般€?),
+        ("Loss\nBinary\ncross-entropy", "鎹熷け锛氫簩鍏冧氦鍙夌喌",
+         "鐢ㄨ緭鍑烘鐜囦笌璁粌琛?is_iceberg 鐨?0/1 璁＄畻銆?),
+        ("WHY THIS BASELINE", "涓轰粈涔堢敤杩欎釜鍩虹嚎", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Start with a small, repeatable CNN.\nKeep the folds and budget fixed\nto compare changes fairly.",
+         "浠庝竴涓彲閲嶅鐨勫皬 CNN 寮€濮嬶紱鎶婃姌鍒掑垎涓庤缁冮绠楀浐瀹氾紝鎵嶈兘鍏钩姣旇緝鏀瑰姩銆?,
+         "鍥哄畾鍚屼竴浠借缁冮泦浜旀姌涓庡悓涓€璁粌杞暟锛屽悗缁敼鍔ㄦ墠鍙綊鍥犮€?),
+        ("TRAINING SETUP", "璁粌璁剧疆", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Adam, LR 0.001, batch size 32\nUp to 30 epochs; early stop after 7\nCPU; weight decay 0.0001",
+         "浼樺寲鍣?Adam锛屽涔犵巼 0.001锛屾壒澶у皬 32锛涙渶澶?30 杞紝楠岃瘉 7 杞笉鍗囧氨鍋滐紱CPU锛涙潈閲嶈“鍑?0.0001銆?,
+         "姣忔壒 32 鏉″彇鑷綋鍓嶆姌璁粌琛岋紱鏃╁仠鍙湅楠岃瘉琛岀殑鍒嗘暟銆?),
+        ("BASELINE SCORE", "鍩虹嚎鍒嗘暟", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("OOF Log Loss 0.26063.\nPublished reference 0.24638, so this environment differs slightly.",
+         "鎶樺 Log Loss 0.26063锛涘叕寮€鍙傝€冨€?0.24638锛岃鏄庤繍琛岀幆澧冪暐鏈夊樊寮傘€?,
+         "0.26063 = 浜旀姌楠岃瘉棰勬祴涓庤缁冮泦 1,604 琛?is_iceberg 绠楀嚭鐨?Log Loss銆?),
+        ("First-version ablations: OOF Log Loss", "绗竴鐗堟秷铻嶅疄楠岋細鎶樺 Log Loss",
+         "鍥涚粍閮藉彧鐢ㄨ缁冮泦锛屽悓涓€浜旀姌銆?),
+        ("Configuration | Loss\nV0: baseline | 0.26063\nV2: higher dropout | 0.26703\n"
+         "V3: angle branch | 0.25407\nV4: missing flag | 0.22683",
+         "閰嶇疆涓庡垎鏁帮細V0 鍩虹嚎 0.26063锛沄2 鎻愰珮 dropout 0.26703锛沄3 鍔犺搴﹀垎鏀?0.25407锛?
+         "V4 鍔犵己澶辨爣璁?0.22683銆?,
+         "V2 鎶?dropout 0.25鈫?.40锛沄3 鎶?inc_angle 浣滆緭鍏ワ紱V4 鍐嶅姞銆岃搴︽槸鍚︾己澶便€嶆爣璁帮紝"
+         "鍏ㄩ儴鐢ㄨ缁冮泦鍚屼竴浜旀姌璇勪及銆?),
+        ("V0鈥揤5 are first-version experiments. Later submission files have a separate version numbering.",
+         "V0鈥揤5 鏄涓€鐗堝疄楠岀紪鍙凤紱涔嬪悗鐨勬彁浜ゆ枃浠剁敤鍙︿竴濂楃紪鍙枫€?, "鏃犮€傜紪鍙疯鏄庛€?),
+        ("CS4486 Final Presentation\n05", CHROME, "鏃?),
+    ]),
+    ("绗?6 椤?路 妯″瀷鏀硅繘 A / B / C", [
+        ("CS4486 PROJECT\n4. Model Improvements\nCHANGE AND EVIDENCE",
+         "CS4486 椤圭洰 路 4. 妯″瀷鏀硅繘 路 鏀瑰姩涓庤瘉鎹?, "鏃犮€?),
+        ("A  Two-level prior", "A 涓ょ骇鍏堥獙", "鏃狅紙鍗＄墖鏍囬锛夈€?),
+        ("HYPOTHESIS", "鍋囪", "鏃狅紙灏忔爣棰橈級銆?),
+        ("Same angle, same label.\nExact matches are rare.",
+         "鍚岃搴﹂€氬父鍚屾爣绛撅紱浣嗗畬鍏ㄧ浉鍚岀殑瑙掑害鍖归厤寰堝皯銆?,
+         "渚濇嵁鏄缁冮泦 inc_angle+is_iceberg 鐨勭粍鍐呬竴鑷寸巼 98.6%銆?),
+        ("IMPLEMENTATION", "瀹炵幇", "鏃狅紙灏忔爣棰橈級銆?),
+        ("Use the exact group first.\nElse a Gaussian kernel.\nFit on training folds only.",
+         "鍏堜娇鐢ㄥ畬鍏ㄧ浉鍚岃搴︾殑缁勶紱娌℃湁灏辩敤楂樻柉鏍革紱鍙湪璁粌鎶樹笂鎷熷悎銆?,
+         "瀵硅缁冮泦姣忎竴鎶橈紝鐢ㄨ鎶樿缁冭鐨?inc_angle+is_iceberg 寤哄厛楠岋紱楠岃瘉琛屽彧鏌ヨ〃锛屾爣绛句笉鍙備笌銆?),
+        ("EFFECT", "鏁堟灉", "鏃狅紙灏忔爣棰橈級銆?),
+        ("Nested OOF\n0.25381 鈫?0.12109", "宓屽鎶樺鍒嗘暟锛?.25381 鈫?0.12109",
+         "璁粌闆嗘姌澶栧垎鏁帮細鍙敤鍥惧儚涓?0.25381锛屽姞瑙掑害鍏堥獙鍚?0.12109銆?),
+        ("OOF gain: 鈭?.13272", "鎶樺鎻愬崌锛氣垝0.13272", "涓や釜璁粌闆嗘姌澶栧垎鏁颁箣宸€?),
+        ("B  Grouped fusion", "B 鍒嗙粍铻嶅悎", "鏃狅紙鍗＄墖鏍囬锛夈€?),
+        ("Exact and near matches\nneed different trust.",
+         "绮剧‘鍖归厤涓庤繎閭诲尮閰嶉渶瑕佷笉鍚岀▼搴﹀湴淇′换銆?,
+         "渚濇嵁锛氳缁冮泦涓?exact 涓€鑷寸巼 98.6%銆乶ear 绾?84%銆?),
+        ("Separate weights for exact\nand near rows.\nFit in each training fold.",
+         "瀵圭簿纭涓庤繎閭昏鍒嗗埆缁欐潈閲嶏紱鍦ㄦ瘡鎶樿缁冮儴鍒嗘嫙鍚堛€?,
+         "鐢ㄨ鎶樿缁冭鐨?is_iceberg 鎷熷悎涓や釜绯绘暟锛岄獙璇佽鍙墦鍒嗐€?),
+        ("Nested OOF\n0.11556 鈫?0.10721", "宓屽鎶樺鍒嗘暟锛?.11556 鈫?0.10721",
+         "璁粌闆嗘姌澶栧垎鏁帮細鍥哄畾鏉冮噸 0.11556锛屽垎缁勬潈閲?0.10721銆?),
+        ("OOF gain: 鈭?.00835", "鎶樺鎻愬崌锛氣垝0.00835", "涓婁袱涓缁冮泦鎶樺鍒嗘暟涔嬪樊銆?),
+        ("C  Student diversity", "C 瀛︾敓妯″瀷澶氭牱鎬?, "鏃狅紙鍗＄墖鏍囬锛夈€?),
+        ("One CNN repeats\nits own mistakes.\nUnlabelled data unused.",
+         "鍗曚釜 CNN 浼氶噸澶嶈嚜宸辩殑閿欒锛涙棤鏍囩鏁版嵁琚氮璐广€?,
+         "鎸囨祴璇曢泦 8,424 琛屽浘鍍忎竴鐩存病琚敤鏉ヨ缁冦€?),
+        ("Distil soft labels, then add a\nshape MLP and a mixup student for different error patterns.",
+         "钂搁杞爣绛撅紝鍐嶅姞鍏ヤ竴涓?shape MLP 涓庝竴涓?mixup 瀛︾敓锛屽埗閫犱笉鍚岀殑閿欒妯″紡銆?,
+         "鎶婃祴璇曢泦 8,424 琛屽浘鍍忛€佽繘鏁欏笀妯″瀷寰楀埌姒傜巼锛堟棤鏍囩锛夛紝褰撹蒋鏍囩璁粌瀛︾敓锛?
+         "shape MLP 鍙敤璁粌闆嗙殑 90 缁寸粺璁￠噺銆?),
+        ("Distilled image OOF\n0.1959 鈫?0.1833", "钂搁鍚庡浘鍍忔姌澶栧垎鏁帮細0.1959 鈫?0.1833",
+         "璁粌闆嗘姌澶栧垎鏁帮細鍔犺蒋鏍囩璁粌鍓?0.1959銆佸悗 0.1833銆?),
+        ("OOF gain: 鈭?.0126", "鎶樺鎻愬崌锛氣垝0.0126", "涓婁袱涓缁冮泦鎶樺鍒嗘暟涔嬪樊銆?),
+        ("Angle evidence changed the score most (鈭?.13); the later steps added far less. "
+         "Gains are per step, not additive.",
+         "瑙掑害璇佹嵁甯︽潵鐨勫垎鏁板彉鍖栨渶澶э紙鈭?.13锛夛紱鍚庣画姝ラ灏忓緱澶氥€傚悇姝ュ鐩婁笉鑳界浉鍔犮€?,
+         "鍏ㄩ儴涓鸿缁冮泦鎶樺鍒嗘暟涔嬪樊锛岃捣鐐逛笉鍚屾晠涓嶅彲鐩稿姞銆?),
+        ("CS4486 Final Presentation\n05", CHROME, "鏃?),
+    ]),
+    ("绗?7 椤?路 妯″瀷鏀硅繘 D / E / F", [
+        ("CS4486 PROJECT\n4. Model Improvements: Refinement\nCHANGE AND EVIDENCE",
+         "CS4486 椤圭洰 路 4. 妯″瀷鏀硅繘锛氱簿淇?路 鏀瑰姩涓庤瘉鎹?, "鏃犮€?),
+        ("D  Training recipe", "D 璁粌閰嶆柟", "鏃狅紙鍗＄墖鏍囬锛夈€?),
+        ("HYPOTHESIS", "鍋囪", "鏃狅紙灏忔爣棰橈級銆?),
+        ("Tuning the setup beats\nadding capacity.",
+         "璋冨ソ璁粌璁剧疆姣斿姞澶фā鍨嬪閲忔洿鏈夋晥銆?,
+         "渚濇嵁锛氬姞瀹界綉缁滐紙24-48-96-128锛変笌鍔犳繁閮芥病鏈夋敼鍠勩€?),
+        ("IMPLEMENTATION", "瀹炵幇", "鏃狅紙灏忔爣棰橈級銆?),
+        ("AdamW, batch 32.\nLR 0.003, decay 0.01.\nCosine schedule.\nSmall 93k CNNs.",
+         "AdamW銆佹壒澶у皬 32銆佸涔犵巼 0.003銆佹潈閲嶈“鍑?0.01銆佷綑寮﹁皟搴︺€佺害 9.3 涓囧弬鏁扮殑灏?CNN銆?,
+         "浠嶅湪璁粌闆嗕笂璁粌锛屽彧鏀硅秴鍙傛暟銆?),
+        ("EFFECT", "鏁堟灉", "鏃狅紙灏忔爣棰橈級銆?),
+        ("Tuned ensemble OOF 0.10194 鈫?0.09976", "璋冨弬鍚庨泦鎴愭姌澶栧垎鏁帮細0.10194 鈫?0.09976",
+         "璁粌闆嗘姌澶栧垎鏁帮紝闄?0.00218銆?),
+        ("鈭?.0016", "鈭?.0016", "绉佹鍒嗘暟鍙樺寲锛?.08944鈫?.08784锛夛紝涓庝笂闈㈢殑鎶樺宸彛寰勪笉鍚屻€?),
+        ("E  Broader soft labels", "E 鏇村鐨勮蒋鏍囩", "鏃狅紙鍗＄墖鏍囬锛夈€?),
+        ("A strict cutoff throws\naway most unlabelled rows.",
+         "杩囦弗鐨勭疆淇￠棬妲涗涪鎺変簡澶ч儴鍒嗘棤鏍囩琛屻€?,
+         "鏃ч棬妲涘彧浠庢祴璇曢泦 8,424 琛岄噷鎸戝嚭绾?3,500 琛屻€?),
+        ("Threshold 0.03 鈫?0.25.\nAbout 6,260 pseudo rows.\nWeight 0.25.\n20 epochs.",
+         "闃堝€?0.03鈫?.25锛岀害 6,260 鏉′吉鏍囩琛岋紝鏉冮噸 0.25锛岃缁?20 杞€?,
+         "鐢ㄦ暀甯堝娴嬭瘯闆?8,424 琛岀粰姒傜巼锛屼繚鐣?p<0.25 鎴?p>0.75 鐨勭害 6,260 琛岋紱绛旀鍗宠姒傜巼銆?),
+        ("Threshold OOF 0.09937 鈫?0.09829", "闃堝€艰皟鏁村悗鐨勬姌澶栧垎鏁帮細0.09937 鈫?0.09829",
+         "璁粌闆嗘姌澶栧垎鏁帮紝闄?0.00108銆?),
+        ("鈭?.0003", "鈭?.0003", "绉佹鍒嗘暟鍙樺寲锛?.08784鈫?.08752锛夈€?),
+        ("F  Angle calibration", "F 瑙掑害鏍囧畾", "鏃狅紙鍗＄墖鏍囬锛夈€?),
+        ("CV and the leaderboard\nprefer different weights.",
+         "浜ゅ弶楠岃瘉涓庢帓琛屾鍋忓ソ涓嶅悓鐨勮搴︽潈閲嶃€?,
+         "璁粌闆嗘渶浼樹负 1.00锛岀姒滄渶浼樼害 0.90銆?),
+        ("Scale both angle weights\nby 0.90 after fitting.\nSame CNNs, LB feedback.",
+         "鎷熷悎鍚庢妸涓や釜瑙掑害鏉冮噸鍚屼箻 0.90锛涙ā鍨嬩笉鍙橈紝渚濇嵁鏉ヨ嚜鎺掕姒滃弽棣堛€?,
+         "涓嶅姩鏁版嵁銆佷笉閲嶈锛涘彧鏀圭郴鏁板悗閲嶆柊瀵规祴璇曢泦 8,424 琛岄娴嬨€?),
+        ("Private 0.08708, CV slightly worse", "绉佹 0.08708锛屼氦鍙夐獙璇佺暐鍙樺樊",
+         "绉佹鍒嗘暟鐢?Kaggle 鐢ㄦ祴璇曢泦鏍囩璁＄畻锛汣V 鎸囪缁冮泦鎶樺鍒嗘暟 0.098287鈫?.098753銆?),
+        ("鈭?.0004", "鈭?.0004", "绉佹鍒嗘暟鍙樺寲锛?.08752鈫?.08708锛夈€?),
+        ("Recipe tuning gave the largest step (鈭?.0021 OOF); the last two steps added only 0.0005..",
+         "璋冨弬璐＄尞鏈€澶э紙鎶樺 鈭?.0021锛夛紱鏈€鍚庝袱姝ュ彧澧炲姞绾?0.0005銆?,
+         "D 闄?0.00218銆丒 闄?0.00108锛屾晠銆屾渶鍚庝袱姝?0.0005銆嶅亸淇濆畧銆?),
+        ("CS4486 Final Presentation\n06", CHROME, "鏃?),
+    ]),
+    ("绗?8 椤?路 鏈€缁堢粨鏋?, [
+        ("CS4486 PROJECT\n5. Final Results\nKAGGLE LATE SUBMISSIONS",
+         "CS4486 椤圭洰 路 5. 鏈€缁堢粨鏋?路 Kaggle 杩熶氦鎻愪氦", "鏃犮€?),
+        ("BEST PRIVATE SCORE", "鏈€浣崇姒滃垎鏁?, "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("0.08708\nversion19.csv", "0.08708锛屾潵鑷?version19.csv",
+         "璇?CSV 鏄娴嬭瘯闆?8,424 琛岀殑棰勬祴锛涘垎鏁扮敱 Kaggle 鐢ㄦ祴璇曢泦鏍囩绠楀嚭銆?),
+        ("TARGET CHECK", "鐩爣鏍稿", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Reached the level of the top five: fourth",
+         "杈惧埌鍓嶄簲姘村钩锛氱鍥?, "鎸夋潗鏂?0.08883 涓?0.08708 鐩稿噺鎺ㄧ畻锛屾棤瀹樻柟鎺掑悕銆?),
+        ("Stretch goal < 0.08883:  met", "鍐插埡鐩爣 < 0.08883锛氬凡杈炬垚",
+         "0.08708 浣庝簬 0.08883锛屽樊 0.00175銆?),
+        ("KEY TAKEAWAY", "鏍稿績缁撹", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("62% lower private loss than our first submission.\n"
+         "The gain came from angle evidence, not from a bigger model.",
+         "绉佹鎹熷け姣旈涓彁浜や綆 62%锛涙敹鐩婃潵鑷搴﹁瘉鎹紝鑰屼笉鏄洿澶х殑妯″瀷銆?,
+         "棣栦釜鎻愪氦绉佹 0.23022銆佹渶缁?0.08708锛屽潎鏉ヨ嚜娴嬭瘯闆嗚瘎鍒嗐€?),
+        ("Private Log Loss: selected submissions", "閮ㄥ垎鎻愪氦鐨勭姒?Log Loss",
+         "姣忎釜鐐规槸璇ユ鎻愪氦鍦ㄦ祴璇曢泦绉佹涓婄殑鍒嗘暟銆?),
+        ("Where errors remain", "閿欒浠嶅湪鍝噷", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Rows with only a near angle match carry 87.2% of the loss.\n"
+         "Where image and angle disagree (231 rows), 50.7% of the loss sits.",
+         "鍙湁杩戦偦瑙掑害鍖归厤鐨勮鎵挎媴 87.2% 鐨勬崯澶憋紱鍥惧儚涓庤搴﹀垽鏂浉鍙嶇殑 231 琛屽崰 50.7%銆?,
+         "鐢ㄨ缁冮泦 1,604 琛岀殑鎶樺棰勬祴鍒嗙粍缁熻锛堝叚鎴愬憳寮€鍙戞ā鍨嬶級锛屼笉鏄祴璇曢泦鍒嗘瀽銆?),
+        ("Late submissions have no official rank. Public and Private scores use different test subsets.",
+         "杩熶氦娌℃湁瀹樻柟鎺掑悕锛涘叕姒滀笌绉佹浣跨敤娴嬭瘯闆嗙殑涓嶅悓瀛愰泦銆?, "鏃犮€?),
+        ("CS4486 Final Presentation\n08", CHROME, "鏃?),
+    ]),
+    ("绗?9 椤?路 璁ㄨ涓庡弽鎬?, [
+        ("CS4486 PROJECT\n6. Discussion & Reflection\nLESSONS AND NEXT STEPS",
+         "CS4486 椤圭洰 路 6. 璁ㄨ涓庡弽鎬?路 缁忛獙涓庝笅涓€姝?, "鏃犮€?),
+        ("WHAT WORKED", "鏈夋晥鐨勫仛娉?, "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Angle information added context: OOF 0.25381 鈫?0.12109.\n"
+         "Group-specific weights helped: 0.11556 鈫?0.10721.\n"
+         "Different student models made the blend stronger: image OOF 0.1959 鈫?0.1833.",
+         "瑙掑害淇℃伅鎻愪緵浜嗕笂涓嬫枃锛?.25381鈫?.12109锛夛紱鍒嗙粍鏉冮噸鏈夊府鍔╋紙0.11556鈫?.10721锛夛紱"
+         "涓嶅悓鐨勫鐢熸ā鍨嬭铻嶅悎鏇村己锛堝浘鍍?0.1959鈫?.1833锛夈€?,
+         "涓夋潯閮芥槸璁粌闆嗘姌澶栧垎鏁帮紝鏉ヨ嚜涓夌粍瀵圭収瀹為獙銆?),
+        ("WHAT DID NOT WORK", "鏃犳晥鐨勫仛娉?, "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Stronger augmentation and larger ensembles often hurt.\n"
+         "Possible causes: lost radar details and similar model errors.\n"
+         "Next time: change one factor at a time and keep augmentation matched to training.",
+         "鏇村己鐨勫浘鍍忓寮轰笌鏇村ぇ鐨勯泦鎴愬線寰€鏇村樊锛涘彲鑳藉師鍥狅細闆疯揪缁嗚妭琚牬鍧忋€佹垚鍛橀敊璇繃浜庣浉浼硷紱"
+         "涓嬫搴斾竴娆″彧鏀逛竴涓洜绱狅紝骞惰澧炲己涓庤缁冩柟寮忓尮閰嶃€?,
+         "渚濇嵁锛氭棆杞缉鏀惧钩绉诲悗绗?0 鎶?0.2951锛涜椽蹇?26 鎴愬憳 0.10561锛屽潎鍔ｄ簬鍘熸柟妗堛€?),
+        ("Two failed experiments", "涓や釜澶辫触鐨勫疄楠?, "鏃狅紙灏忓崱鏍囬锛夈€?),
+        ("Affine augmentation, fold 0:\nLog Loss 0.2951\n \n26-member greedy ensemble:\nOOF 0.10561 vs 0.10194",
+         "鍑犱綍澧炲己绗?0 鎶?Log Loss 0.2951锛?6 鎴愬憳璐績闆嗘垚鎶樺 0.10561锛屽鎵嬪伐 6 鎴愬憳 0.10194銆?,
+         "0.2951 鐢ㄨ缁冮泦绗?0 鎶?321 琛岄獙璇佹牱鏈畻锛涘悗涓や釜鏄缁冮泦鍏ㄤ綋鎶樺鍒嗘暟銆?),
+        ("LIMITATIONS & NEXT STEPS", "灞€闄愪笌涓嬩竴姝?, "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Two limits dominate: the image model is weak without an exact angle match, \n"
+         "and every score was partly chosen by tuning.",
+         "涓や釜涓昏灞€闄愶細娌℃湁绮剧‘瑙掑害鍖归厤鏃跺浘鍍忔ā鍨嬪亸寮憋紱鎵€鏈夊垎鏁伴兘閮ㄥ垎鍙楄皟鍙傞€夋嫨褰卞搷銆?,
+         "鍓嶈€呮潵鑷缁冮泦鎶樺棰勬祴鐨勫垎缁勭粺璁★紱鍚庤€呮寚閮ㄥ垎鍚庡鐞嗙敱绉佹鍙嶉鎸戦€夈€?),
+        ("Only 1,604 labelled examples", "鍙湁 1,604 鏉″甫鏍囩鏍锋湰", "璁粌闆嗚鏁般€?),
+        ("Scores partly reflect tuning", "鍒嗘暟閮ㄥ垎鍙嶆槧璋冨弬", "鎸囧悗澶勭悊涓庤秴鍙傜敱澶氳疆姣旇緝閫夊嚭銆?),
+        ("Next: improve radar image features", "涓嬩竴姝ワ細鏀硅繘闆疯揪鍥惧儚鐗瑰緛",
+         "閽堝璁粌闆嗕腑銆屾棤绮剧‘瑙掑害浼欎即銆嶇殑閭ｆ壒琛屻€?),
+        ("CS4486 Final Presentation\n09", CHROME, "鏃?),
+    ]),
+    ("绗?10 椤?路 AI 浣跨敤涓庡鐜?, [
+        ("CS4486 PROJECT\n7. AI Usage & Reproducibility\nTOOLS AND TEAMWORK",
+         "CS4486 椤圭洰 路 7. AI 浣跨敤涓庡鐜?路 宸ュ叿涓庡垎宸?, "鏃犮€?),
+        ("AI TOOL USAGE", "AI 宸ュ叿浣跨敤", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("ChatGPT / Deepseek helped with debug code and drafting; the design decisions, "
+         "the validation protocol and modeling choices were set and verified by the group.",
+         "ChatGPT锛廌eepSeek 鍗忓姪璋冭瘯浠ｇ爜涓庤捣鑽夋枃瀛楋紱鐮旂┒璁捐銆侀獙璇佹柟妗堜笌寤烘ā閫夋嫨鐢卞皬缁勫埗瀹氬苟鏍搁獙銆?,
+         "鏃犳暟鎹彇鍊笺€?),
+        ("Tools: ChatGPT and Deepseek", "宸ュ叿锛欳hatGPT 涓?DeepSeek", "鏃犮€?),
+        ("Used for: Debugging and explaining results", "鐢ㄩ€旓細璋冭瘯浠ｇ爜涓庤В閲婄粨鏋?, "鏃犮€?),
+        ("The design decisions,validation protocol and modeling choices were independent",
+         "鐮旂┒璁捐銆侀獙璇佹柟妗堜笌寤烘ā閫夋嫨鐢卞皬缁勭嫭绔嬪畬鎴?, "鏃犮€?),
+        ("AI support was used across the roles listed below", "AI 鏀寔璐┛涓嬪垪鍚勮鑹?, "鏃犮€?),
+        ("Huang: data analysis   |   Wu : hyperparameter changes suggestion\nZheng: error analysis, predictions",
+         "榛勶細鏁版嵁鍒嗘瀽锛涘惔锛氳秴鍙傛暟璋冩暣寤鸿锛涢儜锛氳宸垎鏋愪笌棰勬祴", "鍒嗗伐璇存槑銆?),
+        ("HOW TO REPRODUCE", "濡備綍澶嶇幇", "鏃狅紙鏍忕洰鏍囩锛夈€?),
+        ("Fold seed 42 (fixed split file); model seeds 71, 83, 97, 909,\n   1201, 1401, 2601, saved in every checkpoint.",
+         "鎶樼瀛?42锛堝浐瀹氬垝鍒嗘枃浠讹級锛涙ā鍨嬬瀛?71銆?3銆?7銆?09銆?201銆?401銆?601锛屽潎瀛樺叆鍚勬潈閲嶆枃浠躲€?,
+         "42 鍐冲畾璁粌闆?1,604 琛屽浣曞垎浜旀姌锛涘叾浣欑瀛愬喅瀹氬垵濮嬪寲涓庢墦涔遍『搴忋€?),
+        ("Python 3.12, PyTorch 2.15 (CPU), NumPy 2.5; 16 threads, no GPU;",
+         "Python 3.12銆丳yTorch 2.15锛圕PU锛夈€丯umPy 2.5锛?6 绾跨▼锛屾棤 GPU銆?, "鐜锛屾棤鏁版嵁鍙栧€笺€?),
+        ("AdamW, 20 epochs, batch 32, LR 3e-3 / 5e-3, dropout 0.4-0.5,\n   weight decay 1e-2, 8-view TTA.",
+         "AdamW銆?0 杞€佹壒澶у皬 32銆佸涔犵巼 3e-3 鎴?5e-3銆乨ropout 0.4鈥?.5銆佹潈閲嶈“鍑?1e-2銆? 瑙嗚 TTA銆?,
+         "璁粌鐢ㄨ缁冮泦锛? 瑙嗚 TTA 浣滅敤浜庢祴璇曢泦姣忚鍥惧儚銆?),
+        ("github.com/YifanHuang-if/cs4486-iceberg", "浠ｇ爜浠撳簱鍦板潃", "鏃犮€?),
+        ("Log Loss on OOF predictions; level-2 fitted inside each training \n   fold; submission IDs checked.",
+         "鎸囨爣鐢ㄦ姌澶栭娴嬬畻 Log Loss锛涚浜屽眰鍙湪鍚勬姌璁粌閮ㄥ垎鎷熷悎锛涙彁浜ゅ墠鏍稿 ID銆?,
+         "鎶樺棰勬祴鏉ヨ嚜璁粌闆嗭紱ID 鏍稿閽堝娴嬭瘯闆?8,424 琛屻€?),
+        ("None used. All CNNs trained from scratch: 60,433 baseline, \n   93,521 final.",
+         "鏈娇鐢ㄩ璁粌鏉冮噸锛涘叏閮?CNN 浠庨浂璁粌锛氬熀绾?60,433 鍙傛暟锛屾渶缁?93,521 鍙傛暟銆?, "鍙傛暟涓暟銆?),
+        ("No pretrained weights in the reported final pipeline", "鏈€缁堟柟妗堜腑娌℃湁棰勮缁冩潈閲?, "鏃犮€?),
+        ("CS4486 Final Presentation\n10", CHROME, "鏃?),
+    ]),
+    ("绗?11 椤?路 闂瓟椤?, [
+        ("Q&A", "闂瓟", "鏃犮€?),
+        ("Submission evidence", "鎻愪氦璇佹嵁", "鏃狅紙灏忔爣棰橈級銆?),
+        ("Private score: left   |   Public score: right", "宸﹁竟鏄姒滃垎鏁帮紝鍙宠竟鏄叕姒滃垎鏁?,
+         "涓や釜鍒嗘暟閮芥潵鑷祴璇曢泦锛屽彧鏄彇鑷笉鍚屽瓙闆嗐€?),
+        ("Main idea\n \nCombine rar\nand angle predictions\n \nBest Private\n0.08708",
+         "鏍稿績鎬濊矾锛氭妸闆疯揪棰勬祴涓庤搴﹂娴嬬粨鍚堣捣鏉ワ紱鏈€浣崇姒?0.08708銆傦紙鍘熸枃 rar 涓?radar 绗旇锛?,
+         "娴嬭瘯闆嗗浘鍍忕粰姒傜巼锛岃缁冮泦瑙掑害缁欏厛楠岋紝浜岃€呯粨鍚堛€?),
+        ("CS4486 Final Presentation\n11", CHROME, "鏃?),
+    ]),
+]
+
+
+def main() -> int:
+    document = Document()
+    style = document.styles["Normal"]
+    style.font.name = "Microsoft YaHei"
+    style.font.size = Pt(10.5)
+
+    document.add_heading("Group12 路 PPT 閫愰〉鑻变腑瀵圭収", level=0)
+
+    intro = document.add_paragraph()
+    run = intro.add_run(
+        "鏈枃鎸?11 椤甸『搴忓垪鍑烘瘡椤电殑姣忎竴涓枃瀛楀潡锛氳嫳鏂囧師鏂囨暣鍧楃収鎶勶紙淇濈暀鍘熸崲琛岋紝涓嶄笌鍏朵粬鍧楁嫾鎺ワ級锛?
+        "涓嬮潰缁欏嚭涓枃缈昏瘧锛屽啀璇存槑瀹冨紩鐢ㄤ簡鍝唤鏁版嵁鐨勫摢涓€鍒椼€俓n"
+        "璁粌闆?1,604 琛屽惈 band_1/band_2銆乮nc_angle銆乮s_iceberg锛涙祴璇曢泦 8,424 琛屽彧鏈夊墠涓夐」锛屾病鏈夋爣绛俱€?)
+    run.font.color.rgb = GREY
+    run.font.size = Pt(9.5)
+
+    for slide_title, blocks in SLIDES:
+        heading = document.add_heading(slide_title, level=1)
+        heading.runs[0].font.color.rgb = DARK
+
+        for original, translation, data_note in blocks:
+            source = document.add_paragraph()
+            source.paragraph_format.space_after = Pt(1)
+            tag = source.add_run("鍘熸枃  ")
+            tag.bold = True
+            tag.font.size = Pt(9)
+            tag.font.color.rgb = ACCENT
+            text = source.add_run(original)
+            text.font.size = Pt(9.5)
+            text.bold = True
+
+            translated = document.add_paragraph()
+            translated.paragraph_format.left_indent = Pt(12)
+            translated.paragraph_format.space_after = Pt(1)
+            tag2 = translated.add_run("缈昏瘧  ")
+            tag2.bold = True
+            tag2.font.size = Pt(9)
+            tag2.font.color.rgb = ACCENT
+            body = translated.add_run(translation)
+            body.font.size = Pt(9.5)
+
+            note = document.add_paragraph()
+            note.paragraph_format.left_indent = Pt(12)
+            note.paragraph_format.space_after = Pt(8)
+            tag3 = note.add_run("鏁版嵁  ")
+            tag3.bold = True
+            tag3.font.size = Pt(9)
+            tag3.font.color.rgb = GREY
+            note_run = note.add_run(data_note)
+            note_run.font.size = Pt(9)
+            note_run.font.color.rgb = GREY
+
+    document.save(OUT)
+    print(f"saved: {OUT}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+

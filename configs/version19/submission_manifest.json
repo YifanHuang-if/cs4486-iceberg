@@ -1,0 +1,41 @@
+{
+  "name": "version19",
+  "tags": [
+    "v5_shape",
+    "hp_star",
+    "hp_b",
+    "hp_d",
+    "pt25a",
+    "pt25b",
+    "stu5"
+  ],
+  "sigma": 0.012,
+  "alpha": 0.1,
+  "l2": 1.0,
+  "clip": 0.001,
+  "pool_weight": 0.0,
+  "pool_non_exact_only": false,
+  "level2_rows": 1604,
+  "level2_in_sample_oof": 0.0963,
+  "coefficients": [
+    0.859994,
+    1.019971,
+    0.570755,
+    -0.160727
+  ],
+  "test_rows": 8424,
+  "test_mean": 0.371322,
+  "test_exact_share": 0.231481,
+  "test_covered_share": 0.400997,
+  "per_tag_test_mean": {
+    "v5_shape": 0.314188,
+    "hp_star": 0.390205,
+    "hp_b": 0.395669,
+    "hp_d": 0.37542,
+    "pt25a": 0.385524,
+    "pt25b": 0.382818,
+    "stu5": 0.362295
+  },
+  "sha256": "48c197c8534315158402997d7449fc30b717c0468ff1424dfbe6ded59ea8c524",
+  "note": "Development CV submission. The level-2 fit uses training labels only. No Kaggle score is implied."
+}

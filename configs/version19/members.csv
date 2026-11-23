@@ -1,0 +1,8 @@
+tag,seed,epochs,batch,lr,dropout,weight_decay,teacher,pseudo_weight,normalisation
+v5_shape,,160,,,,,,,
+hp_star,909,20,32,0.003,0.5,0.01,v5_teacher,0.25,local
+hp_b,1201,20,32,0.005,0.5,0.01,v5_teacher,0.25,local
+hp_d,1401,20,32,0.003,0.4,0.01,v5_teacher6,0.25,local
+pt25a,1401,20,32,0.003,0.4,0.01,v5_teacher6,0.25,local
+pt25b,2601,20,32,0.003,0.4,0.01,v5_teacher6,0.25,local
+stu5,909,20,64,0.0015,0.5,,v5_teacher,0.25,local

@@ -1,5 +1,20 @@
 # CS4486 Iceberg Classification
 
+## Final version19 source synchronization (2026-11-23)
+
+The final handover's Python source and configuration are now synchronized here,
+including `work/v5_submit.py --angle-scale 0.90`. The reported selected submission
+has Private Log Loss **0.08708** and Public Log Loss **0.10724**.
+
+- [Final configuration, commands and remaining reproduction limitations](docs/VERSION19_SOURCE_SYNC.md)
+- [Version19 settings and source provenance](configs/version19/)
+- [Reviewed report and evidence package](https://github.com/YifanHuang-if/cs4486-iceberg/tree/codex/report-reviewed-20261123/report)
+
+This is source/configuration synchronization, not a new training run or a claim of
+complete numerical replay. Model weights and missing prediction caches are not
+included, and the documented validation isolation issue is not repaired here.
+The earlier results below are retained as historical checkpoints.
+
 ## Refinement checkpoint (2026-11-16)
 
 The current best CNN ensemble with training-fold-only empirical odds and unlabelled query-group pooling reaches full development five-fold Log Loss **0.13136**, compared with the prior V4 **0.22683** on the same primary split. This is **not an official Kaggle score**; the requested private Score < 0.083 is unverified. The individual local CNN also completed the separate grouped check at **0.19730**. Further architectures are paused and excluded from the best full-fold result.

@@ -70,6 +70,11 @@ def main() -> int:
     parser.add_argument("--sigma", type=float, default=0.012)
     parser.add_argument("--alpha", type=float, default=0.1)
     parser.add_argument("--l2", type=float, default=1.0)
+    parser.add_argument("--angle-scale", dest="angle_scale", type=float, default=1.0,
+                        help="multiply both angle coefficients after fitting; "
+                             "the public half carries less angle evidence than the private half")
+    parser.add_argument("--exact-scale", dest="exact_scale", type=float, default=None,
+                        help="override the scaling of the exact-match coefficient only")
     parser.add_argument("--clip", type=float, default=0.001)
     parser.add_argument("--real-only", action="store_true", default=True)
     parser.add_argument("--no-real-only", dest="real_only", action="store_false")
@@ -82,6 +87,10 @@ def main() -> int:
 
     labels, rows, features, info = training_features(args.tags, args.sigma, args.alpha)
     weights = fit_logistic(features[rows], labels[rows], l2=args.l2)
+    if args.angle_scale != 1.0 or args.exact_scale is not None:
+        weights = weights.copy()
+        weights[1] *= args.angle_scale if args.exact_scale is None else args.exact_scale
+        weights[2] *= args.angle_scale
     oof = apply_logistic(features[rows], weights)
     oof_loss = log_loss(labels[rows], oof)
     print(f"level-2 fitted on {int(rows.sum())} rows, in-sample OOF loss={oof_loss:.6f}")

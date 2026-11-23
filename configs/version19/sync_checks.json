@@ -1,0 +1,22 @@
+{
+  "source_files": 183,
+  "source_matches_zip_after_lf_normalization": true,
+  "active_imported_python_compiles": 182,
+  "archived_broken_document_helpers": {
+    "work/build_slide_companion.py": "docs/version19_archive/build_slide_companion.py.txt"
+  },
+  "fold_mapping_matches_main": true,
+  "submitted_csv_hash_matches_original_manifest": true,
+  "full_replay_verified": false,
+  "validation_isolation_fixed": false,
+  "work.v5_submit_help": "PASS",
+  "src.v3.train_help": "PASS",
+  "synthetic_tests": "4 passed: default coefficients, version19 scaling, exact-only override, default scheduler compatibility",
+  "known_warnings": "Imported submission code opens CSV readers without explicit context managers; ResourceWarnings remain in the untouched source.",
+  "audit_runtime": {
+    "python": "3.11.0",
+    "numpy": "2.2.1",
+    "torch": "2.9.1+cpu",
+    "platform": "win32"
+  }
+}
