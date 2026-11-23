@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-23",
+  "repository": "YifanHuang-if/cs4486-iceberg",
+  "main": "638f8e49264638efddbe0d32bec3ecdfd4a95c76",
+  "main_tree": "90ba72334622ac08b80f0c18fc70625a9a08473b",
+  "releases": [],
+  "branches": [
+    {
+      "name": "codex/eda-validation-20261114",
+      "commit": "1088474ce26d55b6be6606363307fd0b07d0e40f",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "codex/iceberg-current-best-20261116",
+      "commit": "b9dcb94d5a2f47cc1243ab32cb160b7b7c06d43b",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "codex/iceberg-steps4-8-20261114",
+      "commit": "c7f802f1ece83f21efa88d6ab72d0bf66750f5ad",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "codex/publish-steps7-8-results-20261115",
+      "commit": "76a070dfbabf4fad2d0ae5975da8c069b44b1466",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "codex/steps7-8-baseline-v1-20261115",
+      "commit": "c8ccc8c528a82c3911a93c186f4fcd87dc1149b7",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "codex/steps9-11-draft-20261116",
+      "commit": "e1f11e175c3ec46a1a8eeac518fea2ffae0ceae2",
+      "truncated": false,
+      "report_presentation_or_version19_files": [
+        "presentation/CS4486_Iceberg_Presentation_Draft.pptx",
+        "report/CS4486_Iceberg_Report_Draft.pdf"
+      ]
+    },
+    {
+      "name": "codex/v3-fold-safe-20261116",
+      "commit": "5c73655c6b4b353cd09301d26c8735fc321c9e55",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "codex/v4-angle-reliability-20261116",
+      "commit": "58a4737db5b2583a8356e5753230edd0c7265954",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "feat/v2-angle-pipeline",
+      "commit": "4551f227a31df7ee61964358dd69d4864a63f283",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    },
+    {
+      "name": "main",
+      "commit": "638f8e49264638efddbe0d32bec3ecdfd4a95c76",
+      "truncated": false,
+      "report_presentation_or_version19_files": []
+    }
+  ]
+}

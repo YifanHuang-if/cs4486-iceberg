@@ -1,0 +1,45 @@
+CS4486 Group 12 — course requirements and repository review
+Review date: 23 November 2026
+
+Scope and conclusion
+The report covers the course template's required sections and presents the available evidence with limitations. This review is not a certification that the project satisfies every academic, performance or reproducibility requirement. Publishing a report to GitHub is not submission to a course portal.
+
+Sources
+- Mini Project Instruction-CS4486.pdf, all seven pages.
+- Mini-Project Report Template- CS4486.pdf, all three pages.
+- Final_Presentation_Template_CS4486.pptx, all ten slides.
+- GitHub main: 638f8e49264638efddbe0d32bec3ecdfd4a95c76.
+- Recursive trees of all ten current branches; repository releases list was empty.
+- Current report, supplied final bundle, audit records and Kaggle screenshots.
+
+What the course explicitly requests
+The two graded final outcomes are a final report PDF (50%) and an in-class presentation (50%). The report must provide access to complete code/notebooks and reproducibility information. These local instructions do not identify an upload platform, submission deadline, exact upload filenames or a separate mandatory weights/OOF archive upload. Do not infer that GitHub publication completes the course submission.
+
+Repository availability before this publication
+- Main contains training/analysis source, fixed folds, configurations and experiment documentation.
+- No final report PDF or final presentation deck is present on main.
+- Only codex/steps9-11-draft-20261116 contains an old presentation/CS4486_Iceberg_Presentation_Draft.pptx and report/CS4486_Iceberg_Report_Draft.pdf. These are not the final version19 report or Group12_Project3.pptx.
+- No version19-named artifacts or final-member model weights were found in any current branch. No releases are available.
+- The local Group12_Project3.pptx and CS4486_final_bundle.zip were provided separately. Final-bundle source contains --angle-scale, which the reviewed main submission script lacks.
+- A report evidence package contains selected CSVs, configurations and audit code, but must not be mistaken for the entire weights/source handover.
+
+Report template checks
+PASS: course-style title, team name, all three names and IDs, approximately 150-word abstract, code link at abstract end, five keywords.
+PASS: all eleven required sections, references, task and metric, dataset challenges, validation, baseline, improvement comparisons, final results, AI disclosure, reflection, reproducibility discussion, individual profiles and relative contributions.
+PASS: final score pair is Private 0.08708 / Public 0.10724; difference is 0.02016. Public/private results are not mixed across submissions. Late-submission score-level comparison is separated from official rank.
+PASS: final seven-member route is identified as trained from scratch; earlier exploratory ResNet-18 use now includes its official weight identifier, source and 11,689,512-parameter count and is explicitly excluded from the final ensemble.
+PASS: actual user-supplied total hours (8, 6, 7), proportions and category estimates are distinguished; role descriptions follow the supplied step allocation.
+PASS: report has no draft/TODO/TBD placeholders; no hard maximum page count is stated in the provided course files. Approximate per-section lengths are guidance.
+
+Outstanding substantive matters
+1. AI policy and independence: course instructions pp. 4–5 permit limited assistance and explicitly prohibit using a complete AI-generated solution verbatim or copying implementation details without understanding them. Repository AI_USAGE.md records substantive AI implementation/execution. The report now separates evidenced human project decisions and coordination from AI-assisted core implementation. No independently written core component has been established by the supplied information. A plausible invented account cannot cure this issue; the team must substantiate actual independent work and ensure compliance with the instructor's policy.
+2. Validation: report Section III identifies a concrete shared-array overwrite that lets validation labels influence prior features. An isolation diagnostic reproduces that dependence; final supplied development values are therefore not claimed as leakage-free CV. Correcting the evaluator and regenerating a properly isolated prediction set is technical work beyond report wording.
+3. Reproducibility: the main branch does not contain the complete final version19 source/configuration chain. The handover lacks individual member prediction caches and the generic predictor cannot fully reconstruct the supplied shape checkpoint. Complete raw-input-to-submission replay has not been established. A complete accessible final code/artifact package and tested reproduction entry point are still needed for a stronger reproducibility claim.
+4. Top-5 target: the instructions' online case says rank within the Top 5. Private 0.08708 is numerically better than the supplied historical fifth-place 0.08883, but version19 is an after-deadline submission with no official historical rank. Public 0.10724 is worse than the supplied public fifth-place 0.08805. Instructor acceptance of a historical private-score comparison cannot be assumed.
+5. Attestation: the leader signature/date graphic is AI-generated handwriting-style text inserted under authorization reported by Zheng Hongyu. It is not a scan of Huang Yifan's own handwriting. The team should use the form of attestation accepted by the instructor. Productive-hour category allocations are estimates, not independently verified time records.
+
+Next submission actions
+- Put the final presentation and complete final code/artifact handover somewhere accessible to the instructor; GitHub currently does not contain all of these materials.
+- Review the AI policy, actual independent contributions, validation findings and reproduction limitations as a group.
+- Confirm the course upload location and the interpretation of late-submission Top-5-level scores with the instructor or course announcement.
+- Submit the required report and presentation through the actual course channel; repository storage alone is not a submission receipt.
